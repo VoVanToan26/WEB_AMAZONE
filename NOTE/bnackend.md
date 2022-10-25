@@ -9,3 +9,10 @@
 
  npm install --save-dev nodemon   
   "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
+
+
+Bai 10 
+7 npm i axios 
+AXIOS IS A LIBRARY TO  SEND REUQETS TO SEVER
+
+8 set proxy in package.json  in front end  "proxy": "http://127.0.0.1:5000",   to get data
