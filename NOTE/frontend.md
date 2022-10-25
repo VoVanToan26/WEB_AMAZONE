@@ -8,3 +8,4 @@ npx create-react-app frontend
 4 Cài đặt babel-plugin-module-resolver
  tao thu muc tinh
  \npm install --save-dev babel-plugin-module-resolver
+
