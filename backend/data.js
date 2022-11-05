@@ -1,6 +1,6 @@
 const data = {
     products: [{
-        _id: 1,
+        _id: '1',
         name: 'sougayliang',
         image: '/images/fishingRod/sougayliang.jpg',
         price: 200,
@@ -10,7 +10,7 @@ const data = {
         rating: 1.5,
         countInStock: 10,
     }, {
-        _id: 2,
+        _id: '2',
         name: 'sougayliangFull',
         image: '/images/fishingRod/sougayliangFull.jpg',
         price: 300,
@@ -20,7 +20,7 @@ const data = {
         rating: 2.5,
         countInStock: 20,
     }, {
-        _id: 3,
+        _id: '3',
         name: 'Zebco33',
         image: '/images/fishingRod/Zebco33.jpg',
         price: 400,
@@ -30,7 +30,7 @@ const data = {
         rating: 3.5,
         countInStock: 30,
     }, {
-        _id: 4,
+        _id: '4',
         name: 'ZebcoRoamFull',
         image: '/images/fishingRod/ZebcoRoamFull.jpg',
         price: 500,
@@ -40,7 +40,7 @@ const data = {
         rating: 4.5,
         countInStock: 40,
     }, {
-        _id: 5,
+        _id: '5',
         name: 'SougayilangSpeed',
         image: '/images/fishingRod/SougayilangSpeed.jpg',
         price: 70,
@@ -51,7 +51,7 @@ const data = {
         countInStock: 50,
     },
     {
-        _id: 6,
+        _id: '6',
         name: 'ZebcoSpincast',
         image: '/images/fishingRod/ZebcoSpincast.jpg',
         price: 70,
