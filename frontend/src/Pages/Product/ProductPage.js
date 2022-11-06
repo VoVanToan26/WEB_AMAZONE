@@ -1,17 +1,30 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import Rating from '~/compenents/Rating';
 import { detailsProduct } from '~/actions/productActions';
 import Loadingbox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
-const ProductPage = (props) => {
-    console.log('props',props)
+
+const ProductPage = () => {
+    //dispatch() is the method used to dispatch actions and trigger state changes to the store. react-redux is simply trying to give you convenient access to it
     const dispatch = useDispatch();
-    const productId = props.match.params.id;
+    console.log('dispatch', dispatch)
+    var props = useParams();
+    console.log('props', props)
+    const productId = props.id;
+    const [qty, setQty] = useState(1);
+    //useSelector lấy state từ Redux store bằng cách sử dụng một selector function làm tham số đầu vào
+    // /Allows you to extract data from the Redux store state, using a selector function.
     const productDetails = useSelector((state) => state.productDetails);
     const { loading, error, product } = productDetails;
-
+    const navigate = useNavigate();
+    const addToCartHandler = () => {
+        // react routewr 6  v4 is props.history.push()
+        navigate(`/cart/${productId}?qty=${qty}`)
+    };
+    console.log('detailsProduct', detailsProduct)
+    // hook 
     useEffect(() => {
         dispatch(detailsProduct(productId));
     }, [dispatch, productId]);
@@ -66,9 +79,38 @@ const ProductPage = (props) => {
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <button className="primary block">Add to Cart</button>
-                                            </li>
+                                            {product.countInStock > 0 && (
+                                                <>
+                                                    <li>
+                                                        <div className="row">
+                                                            <div>Qty</div>
+                                                            <div>
+                                                                <select
+                                                                    value={qty}
+                                                                    onChange={(e) => setQty(e.target.value)}
+                                                                >
+                                                                    {[...Array(product.countInStock).keys()].map(
+                                                                        (x) => (
+                                                                            <option key={x + 1} value={x + 1}>
+                                                                                {x + 1}
+                                                                            </option>
+                                                                        )
+                                                                    )}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <button
+                                                            onClick={addToCartHandler}
+                                                            className="primary block"
+                                                        >
+                                                            Add to Cart
+                                                        </button>
+                                                    </li>
+                                                </>
+                                            )}
+
                                         </ul>
                                     </div>
                                 </div>
@@ -80,4 +122,4 @@ const ProductPage = (props) => {
     );
 }
 
-export default ProductPage;
+export default ProductPage

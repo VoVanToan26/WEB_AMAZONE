@@ -1,6 +1,9 @@
 import config from '~/config';
 import HomePage from '~/Pages/Home';
 import ProductPage from '~/Pages/Product';
+import CartPage from '~/Pages/Cart';
+
+
 
 // Layouts
 
@@ -9,7 +12,9 @@ import ProductPage from '~/Pages/Product';
 // Public routes
 const publicRoutes = [
     { path: config.routes.home, component: HomePage },
-    { path: config.routes.product, component: ProductPage }
+    { path: config.routes.product, component: ProductPage },
+    { path: config.routes.cart, component: CartPage },
+
 ];
 console.log('publicRoutes', publicRoutes);
 const privateRoutes = [];
