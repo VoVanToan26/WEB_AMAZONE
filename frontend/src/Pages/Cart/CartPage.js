@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '~/actions/cartActions';
+import { addToCart, removeFromCart } from '~/actions/cartActions';
 import Messagebox from '~/compenents/Messagebox';
 
 function CartPage() {
@@ -23,7 +23,7 @@ function CartPage() {
     }, [dispatch, productId, qty]);
 
     const removeFromCartHandler = (id) => {
-        // delete action
+        dispatch(removeFromCart(id));
     };
 
     const navigate = useNavigate();
