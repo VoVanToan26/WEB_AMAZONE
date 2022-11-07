@@ -14,6 +14,7 @@ const publicRoutes = [
     { path: config.routes.home, component: HomePage },
     { path: config.routes.product, component: ProductPage },
     { path: config.routes.cart, component: CartPage },
+    { path: config.routes.cartAll, component: CartPage },
 
 ];
 console.log('publicRoutes', publicRoutes);
