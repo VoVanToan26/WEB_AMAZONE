@@ -1,22 +1,20 @@
 1. npm init
-2.npm  i expreess
-3.npm install express
+   2.npm i expreess
+   3.npm install express
 
-4. Suwar type in package.json type::"module"
-5  node backend/server.js to run sever
+2. Suwar type in package.json type::"module"
+   5 node backend/server.js to run sever
 
 6 Cai va chay node mon de debug
 
- npm install --save-dev nodemon   
-  "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
+npm install --save-dev nodemon  
+ "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
 
+Bai 10
+7 npm i axios
+AXIOS IS A LIBRARY TO SEND REUQETS TO SEVER
 
-Bai 10 
-7 npm i axios 
-AXIOS IS A LIBRARY TO  SEND REUQETS TO SEVER
-
-8 set proxy in package.json  in front end  "proxy": "http://127.0.0.1:5000",   to get data
-
+8 set proxy in package.json in front end "proxy": "http://127.0.0.1:5000", to get data
 
 18. 7.1 Create Sample Users In MongoDB
     1. npm install mongoose
@@ -30,3 +28,8 @@ AXIOS IS A LIBRARY TO  SEND REUQETS TO SEVER
     9. create productSchema and productModel
     10. create userRoute
     11. Seed sample data
+19. Create Sample Products In MongoDB
+20. create models/productModel.js
+21. create productSchema and productModel
+22. create productRoute
+23. Seed sample data
