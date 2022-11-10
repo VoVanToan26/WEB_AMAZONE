@@ -1,9 +1,19 @@
 /* eslint-disable no-unused-vars */
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
+
+dotenv.config();
 const app = express();
+
+// use middleware
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+//through by 2 setting or 2 middleware
+
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1/fishing_web', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
