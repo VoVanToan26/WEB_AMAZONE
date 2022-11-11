@@ -1,9 +1,10 @@
 const routes = {
-    product: '/product/:id',
+    product: '/product/:id',  
     cart: '/cart/:id',
     cartAll: '/cart',
-    home: '/',
+    register: '/register',
     signin: '/signin',
+    home: '/',
     // profile: '/@:nickname',
     // Upload: '/upload',
     // search: '/search',

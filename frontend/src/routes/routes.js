@@ -3,6 +3,7 @@ import HomePage from '~/Pages/Home';
 import ProductPage from '~/Pages/Product';
 import CartPage from '~/Pages/Cart';
 import SigninPage from '~/Pages/Signin';
+import RegisterPage from '~/Pages/Register';
 
 
 
@@ -17,6 +18,7 @@ const publicRoutes = [
     { path: config.routes.cart, component: CartPage },
     { path: config.routes.cartAll, component: CartPage },
     { path: config.routes.signin, component: SigninPage },
+    { path: config.routes.register, component: RegisterPage },
 
 ];
 console.log('publicRoutes', publicRoutes);
