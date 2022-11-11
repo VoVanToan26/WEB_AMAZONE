@@ -3,6 +3,7 @@ const routes = {
     cart: '/cart/:id',
     cartAll: '/cart',
     home: '/',
+    signin: '/signin',
     // profile: '/@:nickname',
     // Upload: '/upload',
     // search: '/search',

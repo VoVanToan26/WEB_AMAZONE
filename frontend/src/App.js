@@ -1,14 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { signout } from './actions/userActions';
 function App() {
   // add count cart
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
+  const dispatch = useDispatch();
+  const signoutHandler = () => {
+    dispatch(signout());
+  };
   return (
     <Router>
       <div className="grid-container">
@@ -16,14 +23,32 @@ function App() {
           <div>
             <Link className="brand" to="./">amazona</Link>
           </div>
-          <div className='Carrt' style={{position:'relative'}}>
+          <div className='Carrt' style={{ position: 'relative' }}>
             <Link to="/cart">
-              Cart <FontAwesomeIcon style={{ 'fontSize': '2.5rem' }} icon={faCartShopping}/>
+              Cart <FontAwesomeIcon style={{ 'fontSize': '2.5rem' }} icon={faCartShopping} />
               {cartItems.length > 0 && (
-                <span style={{ position: 'relative', top:'-1rem' }} className="badge">{cartItems.length}</span>
+                <span style={{ position: 'relative', top: '-1rem' }} className="badge">{cartItems.length}</span>
               )}
             </Link>
-            <Link to="/signin">Sign In</Link>
+            {
+              userInfo
+                ? (<div className='dropdown'>
+                  <Link to="#">
+                    {userInfo.name}
+                    <FontAwesomeIcon icon={faCaretDown} />
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="#signout" onClick={signoutHandler}>
+                        Sign Out
+                      </Link>
+                    </li>
+                  </ul>
+                  (</div>
+                )
+                : (<Link to="/signin">Sign In</Link>)
+            }
+
           </div>
         </header>
         <main>

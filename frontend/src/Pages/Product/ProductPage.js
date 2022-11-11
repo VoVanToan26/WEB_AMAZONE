@@ -9,9 +9,7 @@ import Messagebox from '~/compenents/Messagebox';
 const ProductPage = () => {
     //dispatch() is the method used to dispatch actions and trigger state changes to the store. react-redux is simply trying to give you convenient access to it
     const dispatch = useDispatch();
-    console.log('dispatch', dispatch)
     var props = useParams();
-    console.log('props', props)
     const productId = props.id;
     const [qty, setQty] = useState(1);
     //useSelector lấy state từ Redux store bằng cách sử dụng một selector function làm tham số đầu vào

@@ -21,3 +21,7 @@ tao thu muc tinh
     4. render cartItems.length + Add icon cart
 
 Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build Cart Screen 1. create 2 columns for cart items and cart action 2. cartItems.length === 0 ? cart is empty 3. show item image, name, qty and price 4. Proceed to Checkout button 5. Implement remove from cart action 17. Implement Remove From Cart Action 1. create removeFromCart constants, actions and reducers 2. add reducer to store.js 3. use action in CartScreen.js
+22. Implement SignIn Action
+    1. create signin constants, actions and reducers
+    2. add reducer to store.js
+    3. use action in SigninScreen.js
