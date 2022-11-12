@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { signin } from '~/actions/userActions';
 import Loadingbox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
 
 export default function SigninPage() {
-    var props = useParams();
+    var props = useLocation()
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const redirect = props.search
+        ? props.search.split('=')[1]
+        : '/';
 
-    const redirect = props.length ? `/redirect=${props.redirect}` : '/';
-    console.log('redirect', redirect);
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo, loading, error } = userSignin;
 

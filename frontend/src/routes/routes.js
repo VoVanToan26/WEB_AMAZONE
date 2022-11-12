@@ -4,6 +4,8 @@ import ProductPage from '~/Pages/Product';
 import CartPage from '~/Pages/Cart';
 import SigninPage from '~/Pages/Signin';
 import RegisterPage from '~/Pages/Register';
+import ShippingAddressPage from '~/Pages/Shipping';
+
 
 
 
@@ -19,6 +21,7 @@ const publicRoutes = [
     { path: config.routes.cartAll, component: CartPage },
     { path: config.routes.signin, component: SigninPage },
     { path: config.routes.register, component: RegisterPage },
+    { path: config.routes.shipping, component: ShippingAddressPage },
 
 ];
 console.log('publicRoutes', publicRoutes);
