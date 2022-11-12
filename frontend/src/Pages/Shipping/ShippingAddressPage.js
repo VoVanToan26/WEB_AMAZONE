@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import CheckoutSteps from '~/compenents/CheckoutSteps';
 
 export default function ShippingAddressPage() {
-    var props = useLocation();
+    // var props = useLocation();
     const navigate = useNavigate();
 
     const userSignin = useSelector((state) => state.userSignin);

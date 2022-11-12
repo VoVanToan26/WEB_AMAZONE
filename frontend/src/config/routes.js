@@ -3,6 +3,7 @@ const routes = {
     cart: '/cart/:id',
     cartAll: '/cart',
     shipping: '/shipping',
+    payment: '/payment',
     register: '/register',
     signin: '/signin',
     home: '/',

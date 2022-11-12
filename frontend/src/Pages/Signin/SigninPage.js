@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { signin } from '~/actions/userActions';
+import CheckoutSteps from '~/compenents/CheckoutSteps';
 import Loadingbox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
 
@@ -34,6 +35,7 @@ export default function SigninPage() {
     }, [navigate, redirect, userInfo]);
     return (
         <div>
+            <CheckoutSteps step1 ></CheckoutSteps>
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Sign In</h1>
