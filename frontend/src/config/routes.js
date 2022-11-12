@@ -4,6 +4,7 @@ const routes = {
     cartAll: '/cart',
     shipping: '/shipping',
     payment: '/payment',
+    placeOrder: '/placeorder',
     register: '/register',
     signin: '/signin',
     home: '/',
