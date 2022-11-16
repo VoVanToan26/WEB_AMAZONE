@@ -33,3 +33,8 @@ AXIOS IS A LIBRARY TO SEND REUQETS TO SEVER
 21. create productSchema and productModel
 22. create productRoute
 23. Seed sample data
+27. Create Place Order API
+    1. createOrder api
+    2. create orderModel
+    3. create orderRouter
+    4. create post order route

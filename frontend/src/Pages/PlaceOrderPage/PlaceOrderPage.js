@@ -1,25 +1,40 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { createOrder } from '~/actions/orderActions';
 import CheckoutSteps from '~/compenents/CheckoutSteps';
-export default function PlaceOrderScreen() {
-    var props = useLocation();
+import Loadingbox from '~/compenents/Loadingbox';
+import Messagebox from '~/compenents/Messagebox';
+import { ORDER_CREATE_RESET } from '~/constants/orderConstants';
+export default function PlaceOrderPage() {
     const navigate = useNavigate();
-
     const cart = useSelector((state) => state.cart);
     if (!cart.paymentMethod) {
         navigate('/payment');
     }
+    const orderCreate = useSelector((state) => state.orderCreate);
+    console.log('orderCreate', orderCreate)
+    const { loading, success, error, order } = orderCreate;
+
     const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
     cart.itemsPrice = toPrice(
         cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
     );
+    const dispatch = useDispatch();
     cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
     cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
     const placeOrderHandler = () => {
         // TODO: dispatch place order action
+        dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
     };
+    useEffect(() => {
+        if (success) {
+            navigate(`/order/${order._id}`);
+            dispatch({ type: ORDER_CREATE_RESET });
+        }
+    }, [dispatch, order, navigate, success]);
     return (
         <div>
             <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -120,6 +135,8 @@ export default function PlaceOrderScreen() {
                                     Place Order
                                 </button>
                             </li>
+                            {loading && <Loadingbox></Loadingbox>}
+                            {error && <Messagebox variant="danger">{error}</Messagebox>}
                         </ul>
                     </div>
                 </div>

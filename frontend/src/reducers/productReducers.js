@@ -27,7 +27,6 @@ export const productDetailsReducer = (
     state = { product: {}, loading: true },
     action
 ) => {
-    console.log('action', action)
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
             return { loading: true };
