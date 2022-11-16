@@ -5,6 +5,7 @@ const routes = {
     shipping: '/shipping',
     payment: '/payment',
     placeOrder: '/placeorder',
+    order: '/order/:id',
     register: '/register',
     signin: '/signin',
     home: '/',

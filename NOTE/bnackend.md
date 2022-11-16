@@ -38,3 +38,10 @@ AXIOS IS A LIBRARY TO SEND REUQETS TO SEVER
     2. create orderModel
     3. create orderRouter
     4. create post order route
+29. Create Order Screen
+    1. build order api for /api/orders/:id
+    2. create OrderScreen.js
+    3. dispatch order details action in useEffect
+    4. load data with useSelector
+    5. show data like place order screen
+    6. create order details constant, action and reducer
