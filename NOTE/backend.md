@@ -45,3 +45,8 @@ AXIOS IS A LIBRARY TO SEND REUQETS TO SEVER
     4. load data with useSelector
     5. show data like place order screen
     6. create order details constant, action and reducer
+31. Implement Order Payment
+    1. update order after payment
+    2. create payOrder in api.js
+    3. create route for /:id/pay in orderRouter.js
+    4. rerender after pay order
