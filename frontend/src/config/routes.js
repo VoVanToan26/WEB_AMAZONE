@@ -6,6 +6,7 @@ const routes = {
     payment: '/payment',
     placeOrder: '/placeorder',
     order: '/order/:id',
+    orderHistory: '/orderhistory',
     register: '/register',
     signin: '/signin',
     home: '/',

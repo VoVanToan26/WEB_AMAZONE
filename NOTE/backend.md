@@ -50,3 +50,6 @@ AXIOS IS A LIBRARY TO SEND REUQETS TO SEVER
     2. create payOrder in api.js
     3. create route for /:id/pay in orderRouter.js
     4. rerender after pay order
+
+32 
+1. edit router in config and router folder

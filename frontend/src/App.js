@@ -37,11 +37,15 @@ function App() {
                     {userInfo.name}
                     <FontAwesomeIcon icon={faCaretDown} />
                   </Link>
+                  
                   <ul className="dropdown-content">
                     <li>
                       <Link to="#signout" onClick={signoutHandler}>
                         Sign Out
                       </Link>
+                    </li>
+                    <li>
+                      <Link to="/orderhistory">Order History</Link>
                     </li>
                   </ul>
                   (</div>
