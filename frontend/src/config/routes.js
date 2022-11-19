@@ -7,6 +7,7 @@ const routes = {
     placeOrder: '/placeorder',
     order: '/order/:id',
     orderHistory: '/orderhistory',
+    profile: '/profile',
     register: '/register',
     signin: '/signin',
     home: '/',

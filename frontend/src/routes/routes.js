@@ -9,6 +9,7 @@ import PaymentPage from '~/Pages/Payment';
 import PlaceOrderPage from '~/Pages/PlaceOrder';
 import OrderPage from '~/Pages/Order';
 import OrderHistoryPage from '~/Pages/OrderHistory';
+import ProfilePage from '~/Pages/Profile';
 
 
 
@@ -30,6 +31,7 @@ const publicRoutes = [
     { path: config.routes.placeOrder, component: PlaceOrderPage },
     { path: config.routes.order, component: OrderPage },
     { path: config.routes.orderHistory, component: OrderHistoryPage },
+    { path: config.routes.profile, component: ProfilePage },
 
 ];
 console.log('publicRoutes', publicRoutes);

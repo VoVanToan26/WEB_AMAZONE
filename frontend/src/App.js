@@ -40,6 +40,9 @@ function App() {
                   
                   <ul className="dropdown-content">
                     <li>
+                      <Link to="/profile">User Profile</Link>
+                    </li>
+                    <li>
                       <Link to="#signout" onClick={signoutHandler}>
                         Sign Out
                       </Link>
