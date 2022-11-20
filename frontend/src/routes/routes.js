@@ -11,9 +11,6 @@ import OrderPage from '~/Pages/Order';
 import OrderHistoryPage from '~/Pages/OrderHistory';
 import ProfilePage from '~/Pages/Profile';
 
-
-
-
 // Layouts
 
 // Pages
@@ -31,7 +28,7 @@ const publicRoutes = [
     { path: config.routes.placeOrder, component: PlaceOrderPage },
     { path: config.routes.order, component: OrderPage },
     { path: config.routes.orderHistory, component: OrderHistoryPage },
-    { path: config.routes.profile, component: ProfilePage },
+    { path: config.routes.profile, component: ProfilePage, private:true },
 
 ];
 console.log('publicRoutes', publicRoutes);

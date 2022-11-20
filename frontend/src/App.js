@@ -4,7 +4,8 @@ import { publicRoutes } from '~/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { signout } from './actions/userActions';
+import { signout } from '~/actions/userActions';
+import PrivateRoute from './compenents/PrivateRoute/PrivateRoute';
 function App() {
   // add count cart
   const cart = useSelector((state) => state.cart);
@@ -37,7 +38,7 @@ function App() {
                     {userInfo.name}
                     <FontAwesomeIcon icon={faCaretDown} />
                   </Link>
-                  
+
                   <ul className="dropdown-content">
                     <li>
                       <Link to="/profile">User Profile</Link>
@@ -51,7 +52,7 @@ function App() {
                       <Link to="/orderhistory">Order History</Link>
                     </li>
                   </ul>
-                  (</div>
+                </div>
                 )
                 : (<Link to="/signin">Sign In</Link>)
             }
@@ -62,7 +63,16 @@ function App() {
           <Routes>
             {publicRoutes.map((route, index) => {
               const Page = route.component
-              return <Route key={index} path={route.path} element={<Page />} />
+              console.log("page", Page)
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    (route.private )
+                      ? <PrivateRoute  isAllowed={userInfo} redirectPath={`/signin?redirect=${route.path}`} > <Page /></PrivateRoute>
+                      : <Page />} />
+              )
             })}
           </Routes>
         </main>
