@@ -56,7 +56,27 @@ function App() {
                 )
                 : (<Link to="/signin">Sign In</Link>)
             }
-
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin">Admin
+                  <FontAwesomeIcon icon={faCaretDown} />
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/productlist">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/userlist">Users</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
         <main>
@@ -69,8 +89,8 @@ function App() {
                   key={index}
                   path={route.path}
                   element={
-                    (route.private )
-                      ? <PrivateRoute  isAllowed={userInfo} redirectPath={`/signin?redirect=${route.path}`} > <Page /></PrivateRoute>
+                    (route.private)
+                      ? <PrivateRoute isAllowed={userInfo && ((route.isAdminPage && userInfo.isAdmin) || !route.isAdminPage)}  redirectPath={`/signin?redirect=${route.path}`} > <Page /></PrivateRoute>
                       : <Page />} />
               )
             })}

@@ -42,3 +42,7 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     4. create getPaypalClientID in api.js
     5. add paypal checkout script in OrderScreen.js
     6. show paypal button
+35. Create Admin View
+    1. Create Admin Menu
+    2. Create Admin Middleware in Backend
+    3. Create Admin Route in Frontend
