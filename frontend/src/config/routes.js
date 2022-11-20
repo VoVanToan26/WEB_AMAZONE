@@ -10,6 +10,7 @@ const routes = {
     profile: '/profile',
     register: '/register',
     signin: '/signin',
+    productList: '/productlist',
     home: '/',
     // profile: '/@:nickname',
     // Upload: '/upload',

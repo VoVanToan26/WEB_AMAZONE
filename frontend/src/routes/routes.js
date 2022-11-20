@@ -10,6 +10,7 @@ import PlaceOrderPage from '~/Pages/PlaceOrder';
 import OrderPage from '~/Pages/Order';
 import OrderHistoryPage from '~/Pages/OrderHistory';
 import ProfilePage from '~/Pages/Profile';
+import ProductListPage from '~/Pages/ProductList';
 
 // Layouts
 
@@ -28,7 +29,8 @@ const publicRoutes = [
     { path: config.routes.placeOrder, component: PlaceOrderPage },
     { path: config.routes.order, component: OrderPage },
     { path: config.routes.orderHistory, component: OrderHistoryPage },
-    { path: config.routes.profile, component: ProfilePage, private:true },
+    { path: config.routes.profile, component: ProfilePage, private: true },
+    { path: config.routes.productList, component: ProductListPage, private: true, isAminPage:true },
 
 ];
 console.log('publicRoutes', publicRoutes);
