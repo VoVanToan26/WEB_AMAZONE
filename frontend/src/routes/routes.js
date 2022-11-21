@@ -30,7 +30,7 @@ const publicRoutes = [
     { path: config.routes.order, component: OrderPage },
     { path: config.routes.orderHistory, component: OrderHistoryPage },
     { path: config.routes.profile, component: ProfilePage, private: true },
-    { path: config.routes.productList, component: ProductListPage, private: true, isAminPage:true },
+    { path: config.routes.productList, component: ProductListPage, private: true, isAminPage: true, exact: true },
 
 ];
 console.log('publicRoutes', publicRoutes);

@@ -4,7 +4,7 @@ import { createProduct, listProducts } from '~/actions/productActions';
 import LoadingBox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
 import { useNavigate } from 'react-router-dom';
-import { PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_RESET } from '~/constants/productConstants';
+import { PRODUCT_CREATE_RESET } from '~/constants/productConstants';
 
 
 
@@ -14,31 +14,32 @@ export default function ProductListPage(props) {
     const productList = useSelector((state) => state.productList);
     const productCreate = useSelector((state) => state.productCreate);
     const { loading, error, products } = productList;
+    console.log('productList', productList)
     const {
         loading: loadingCreate,
         error: errorCreate,
         success: successCreate,
         product: createdProduct,
     } = productCreate;
-    if (successCreate) {
-        dispatch({ type: PRODUCT_CREATE_RESET });
-        navigate(`/product/${createdProduct._id}/edit`);
-    }
+    console.log('productCreate', productCreate)
     useEffect(() => {
+        if (successCreate) {
+            dispatch({ type: PRODUCT_CREATE_RESET });
+            navigate(`/product/${createdProduct._id}/edit`);
+        }
         dispatch(listProducts());
-    }, [createdProduct, dispatch, props.history, successCreate]);
+    }, [createdProduct, dispatch, navigate, successCreate]);
     const deleteHandler = () => {
         /// TODO: dispatch delete action
     };
     const createHandler = () => {
-        console.log('createHandler')
         /// TODO dispatch add acttion
         dispatch(createProduct())
     }
+    
     return (
         <div>
             <div className="row">
-                <h1>Products</h1>
                 <button type="button" className="primary" onClick={createHandler}>
                     Create Product
                 </button>

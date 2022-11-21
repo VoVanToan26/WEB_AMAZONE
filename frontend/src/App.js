@@ -88,9 +88,10 @@ function App() {
                 <Route
                   key={index}
                   path={route.path}
+                  exact={route.exact} 
                   element={
                     (route.private)
-                      ? <PrivateRoute isAllowed={userInfo && ((route.isAdminPage && userInfo.isAdmin) || !route.isAdminPage)}  redirectPath={`/signin?redirect=${route.path}`} > <Page /></PrivateRoute>
+                      ? <PrivateRoute isAllowed={userInfo && ((route.isAdminPage && userInfo.isAdmin) || !route.isAdminPage)}  redirectPath={`/signin?redirect=${route.path}`} > <Page  /></PrivateRoute>
                       : <Page />} />
               )
             })}

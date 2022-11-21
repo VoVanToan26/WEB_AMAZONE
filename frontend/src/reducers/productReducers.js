@@ -41,15 +41,12 @@ export const productDetailsReducer = (
             return state;
     }
 };
-export const productCreateReducer = (
-    state = { product: {}, loading: true },
-    action
-) => {
+export const productCreateReducer = (state = {}, action) => {
     switch (action.type) {
         case PRODUCT_CREATE_REQUEST:
             return { loading: true };
         case PRODUCT_CREATE_SUCCESS:
-            return { loading: false, product: action.payload };
+            return { loading: false, success: true, product: action.payload };
         case PRODUCT_CREATE_FAIL:
             return { loading: false, error: action.payload };
         case PRODUCT_CREATE_RESET:
