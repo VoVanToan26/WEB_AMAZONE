@@ -52,3 +52,9 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     2. build Create Product button
     3. define product create constant, action and reducer
     4. use action in Product List Screen
+38. Build Product Edit Screen
+    1. create edit screen
+    2. define state
+    3. create fields
+    4. load product details
+    5.  add to routes

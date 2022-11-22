@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Messagebox from '~/compenents/Messagebox';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { detailsProduct } from '~/actions/productActions';
+import { detailsProduct, updateProduct } from '~/actions/productActions';
 import LoadingBox from '~/compenents/Loadingbox';
+import { PRODUCT_UPDATE_RESET } from '~/constants/productConstants';
 
 
 
@@ -21,10 +22,25 @@ export default function ProductEditPage() {
 
     const productDetails = useSelector((state) => state.productDetails);
     const { loading, error, product } = productDetails;
+    //get state when update product
+    const productUpdate = useSelector((state) => state.productUpdate);
+    const {
+        loading: loadingUpdate,
+        error: errorUpdate,
+        success: successUpdate,
+    } = productUpdate;
+    // get id from link 
     var props = useParams();
     const productId = props.id;
+    // get product detail when no have product or shet input value  when have product
     useEffect(() => {
-        if (!product || product._id !== productId) {
+        // if update success redirect to /product
+        if (successUpdate) {
+            navigate('/productlist');
+        }
+        // if !product or update success reset oriuct 
+        if (!product || product._id !== productId || successUpdate) {
+            dispatch({ type: PRODUCT_UPDATE_RESET });
             dispatch(detailsProduct(productId));
         } else {
             setName(product.name);
@@ -34,11 +50,23 @@ export default function ProductEditPage() {
             setCountInStock(product.countInStock);
             setBrand(product.brand);
             setDescription(product.description);
+            console.log(product.price)
+
         }
-    }, [product, dispatch, productId]);
+    }, [product, dispatch, productId, successUpdate, navigate]);
     const submitHandler = (e) => {
         e.preventDefault();
-        // TODO: dispatch update product
+        dispatch(updateProduct({
+            _id: productId,
+            name,
+            price,
+            image,
+            category,
+            brand,
+            countInStock,
+            description,
+        })
+        )
     };
 
     return (

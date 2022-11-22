@@ -53,3 +53,8 @@ AXIOS IS A LIBRARY TO SEND REUQETS TO SEVER
 
 32 
 1. edit router in config and router folder
+
+39. Update Product
+    1. define update api
+    2. define product update constant, action and reducer
+    3. use action in Product Edit Screen
