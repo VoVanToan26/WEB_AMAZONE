@@ -4,8 +4,9 @@ import Messagebox from '~/compenents/Messagebox';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { detailsProduct, updateProduct } from '~/actions/productActions';
-import LoadingBox from '~/compenents/Loadingbox';
+import Loadingbox from '~/compenents/Loadingbox';
 import { PRODUCT_UPDATE_RESET } from '~/constants/productConstants';
+import Axios from 'axios';
 
 
 
@@ -68,7 +69,34 @@ export default function ProductEditPage() {
         })
         )
     };
+    const [loadingUpload, setLoadingUpload] = useState(false);
+    const [errorUpload, setErrorUpload] = useState('');
 
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const uploadFileHandler = async (e) => {
+        // get file from event upload
+        const file = e.target.files[0];
+        // create form data
+        const bodyFormData = new FormData();
+        bodyFormData.append('image', file);
+        // change value loadingUpload
+        setLoadingUpload(true);
+        try {
+            // get data fro
+            const { data } = await Axios.post('/api/uploads', bodyFormData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${userInfo.token}`,
+                },
+            });
+            setImage(data);
+            setLoadingUpload(false);
+        } catch (error) {
+            setErrorUpload(error.message);
+            setLoadingUpload(false);
+        }
+    };
     return (
         <div>
             <form className="form" onSubmit={submitHandler}>
@@ -76,7 +104,7 @@ export default function ProductEditPage() {
                     <h1>Edit Product {productId}</h1>
                 </div>
                 {loading ? (
-                    <LoadingBox></LoadingBox>
+                    <Loadingbox></Loadingbox>
                 ) : error ? (
                     <Messagebox variant="danger">{error}</Messagebox>
                 ) : (
@@ -110,6 +138,19 @@ export default function ProductEditPage() {
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)}
                             ></input>
+                        </div>
+                        <div>
+                            <label htmlFor="imageFile">Image File</label>
+                            <input
+                                type="file"
+                                id="imageFile"
+                                label="Choose Image"
+                                onChange={uploadFileHandler}
+                            ></input>
+                            {loadingUpload && <Loadingbox></Loadingbox>}
+                            {errorUpload && (
+                                <Messagebox variant="danger">{errorUpload}</Messagebox>
+                            )}
                         </div>
                         <div>
                             <label htmlFor="category">Category</label>

@@ -58,3 +58,9 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     3. create fields
     4. load product details
     5.  add to routes
+40. Upload Product Image
+    1. npm install multer
+        
+    7. define upload router
+    8. create uploads folder 
+    9. Handle frontend
