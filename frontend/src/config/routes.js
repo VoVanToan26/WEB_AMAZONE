@@ -11,6 +11,7 @@ const routes = {
     register: '/register',
     signin: '/signin',
     productList: '/productlist',
+    productEdit: '/product/:id/edit',
     home: '/',
     // profile: '/@:nickname',
     // Upload: '/upload',
