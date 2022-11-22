@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, listProducts } from '~/actions/productActions';
+import { createProduct, deleteProduct, listProducts } from '~/actions/productActions';
 import LoadingBox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
 import { useNavigate } from 'react-router-dom';
-import { PRODUCT_CREATE_RESET } from '~/constants/productConstants';
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '~/constants/productConstants';
 
 
 
@@ -21,22 +21,38 @@ export default function ProductListPage(props) {
         success: successCreate,
         product: createdProduct,
     } = productCreate;
+
+
+    const productDelete = useSelector((state) => state.productDelete);
+    const {
+        loading: loadingDelete,
+        error: errorDelete,
+        success: successDelete,
+    } = productDelete;
+
+
     console.log('productCreate', productCreate)
     useEffect(() => {
         if (successCreate) {
             dispatch({ type: PRODUCT_CREATE_RESET });
             navigate(`/product/${createdProduct._id}/edit`);
         }
+        if (successDelete) {
+            dispatch({ type: PRODUCT_DELETE_RESET });
+        }
         dispatch(listProducts());
-    }, [createdProduct, dispatch, navigate, successCreate]);
-    const deleteHandler = () => {
+    }, [createdProduct, dispatch, navigate, successCreate, successDelete]);
+    const deleteHandler = (product) => {
         /// TODO: dispatch delete action
+        if (window.confirm('Are you sure to delete?')) {
+            dispatch(deleteProduct(product._id));
+        }
     };
     const createHandler = () => {
         /// TODO dispatch add acttion
         dispatch(createProduct())
     }
-    
+
     return (
         <div>
             <div className="row">

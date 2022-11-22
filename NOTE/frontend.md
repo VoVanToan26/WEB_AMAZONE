@@ -60,7 +60,11 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     5.  add to routes
 40. Upload Product Image
     1. npm install multer
-        
+
     7. define upload router
     8. create uploads folder 
     9. Handle frontend
+41. Delete Product
+    1.  create delete api in backend
+    2.  create delete constants, action and reducer
+    3.  use it in product list screen
