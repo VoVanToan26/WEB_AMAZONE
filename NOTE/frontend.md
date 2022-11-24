@@ -85,3 +85,6 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
 43     2. create delete order action and reducer
     3. add order delete action to order list
     Click delete -->  dispatch delete order to action  --> dispatch request  --> try call api delte (api/order/:id)-> dispatch delete success  to reducer --> reucer return state  {loading is fasle and success tru } --> chaneg state in useEffect hook  --> dispatch reset delete to rerender 
+44. Deliver Order
+    1. create constant, actions and reducers for deliver order
+    2. add order deliver action to order details screen

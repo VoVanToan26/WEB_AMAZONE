@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { detailsOrder, payOrder } from '~/actions/orderActions';
+import { deliverOrder, detailsOrder, payOrder } from '~/actions/orderActions';
 import Axios from 'axios';
 import { PayPalButton } from "react-paypal-button-v2";
-
 import Loadingbox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
+import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '~/constants/orderConstants';
+
 export default function OrderPage() {
     const orderId = useParams().id;
+    const dispatch = useDispatch();
     const [sdkReady, setSdkReady] = useState(false);
     const orderDetails = useSelector((state) => state.orderDetails);
+
     const { order, loading, error } = orderDetails;
     const orderPay = useSelector((state) => state.orderPay);
+    //check login
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
     const {
         loading: loadingPay,
         error: errorPay,
         success: successPay,
     } = orderPay;
-    const dispatch = useDispatch();
+
+    const orderDeliver = useSelector((state) => state.orderDeliver);
+    const {
+        loading: loadingDeliver,
+        error: errorDeliver,
+        success: successDeliver,
+    } = orderDeliver;
 
     useEffect(() => {
 
@@ -33,7 +46,14 @@ export default function OrderPage() {
             };
             document.body.appendChild(script);
         };
-        if (!order) {
+        if (
+            !order ||
+            successPay ||
+            successDeliver ||
+            (order && order._id !== orderId)
+        ) {
+            dispatch({ type: ORDER_PAY_RESET });
+            dispatch({ type: ORDER_DELIVER_RESET });
             dispatch(detailsOrder(orderId));
         } else {
             if (!order.isPaid) {
@@ -44,14 +64,16 @@ export default function OrderPage() {
                 }
             }
         }
-    }, [dispatch, order, orderId, sdkReady, successPay]);
+    }, [dispatch, order, orderId, sdkReady, successPay, successDeliver]);
 
     const successPaymentHandler = (paymentResult) => {
         // TODO: dispatch pay order
         dispatch(payOrder(order, paymentResult));
 
     };
-
+    const deliverHandler = () => {
+        dispatch(deliverOrder(order._id));
+    };
     return loading ? (
         <Loadingbox></Loadingbox>
     ) : error ? (
@@ -178,6 +200,21 @@ export default function OrderPage() {
                                             ></PayPalButton>
                                         </>
                                     )}
+                                </li>
+                            )}
+                            {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                <li>
+                                    {loadingDeliver && <Loadingbox></Loadingbox>}
+                                    {errorDeliver && (
+                                        <Messagebox variant="danger">{errorDeliver}</Messagebox>
+                                    )}
+                                    <button
+                                        type="button"
+                                        className="primary block"
+                                        onClick={deliverHandler}
+                                    >
+                                        Deliver Order
+                                    </button>
                                 </li>
                             )}
                         </ul>
