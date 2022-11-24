@@ -82,3 +82,6 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     3. Add reducer to store
         Chaneg state to store --> change state   --> go to home page  user efffer apply -> create 3 valuer loading succes fail in to orderlist 
     4. show products on the screen
+43     2. create delete order action and reducer
+    3. add order delete action to order list
+    Click delete -->  dispatch delete order to action  --> dispatch request  --> try call api delte (api/order/:id)-> dispatch delete success  to reducer --> reucer return state  {loading is fasle and success tru } --> chaneg state in useEffect hook  --> dispatch reset delete to rerender 

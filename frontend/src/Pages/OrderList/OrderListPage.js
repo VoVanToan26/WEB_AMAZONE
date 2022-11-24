@@ -1,24 +1,37 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listOrders } from '~/actions/orderActions';
+import { deleteOrders, listOrders } from '~/actions/orderActions';
 import Loadingbox from '~/compenents/Loadingbox';
 import Messagebox from '~/compenents/Messagebox';
 import { useNavigate } from 'react-router-dom';
+import { ORDER_DELETE_RESET } from '~/constants/orderConstants';
 
 export default function OrderListPage(props) {
     const navigate= useNavigate();
     const orderList = useSelector((state) => state.orderList);
     const { loading, error, orders } = orderList;
+    const orderDelete = useSelector((state) => state.orderDelete);
+    const {
+        loading: loadingDelete,
+        error: errorDelete,
+        success: successDelete,
+    } = orderDelete;
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch({ type: ORDER_DELETE_RESET });
         dispatch(listOrders());
-    }, [dispatch]);
+    }, [dispatch, successDelete]);
     const deleteHandler = (order) => {
         // TODO: delete handler
+        if (window.confirm('Are you sure to delete?')) {
+            dispatch(deleteOrders(order._id));
+        }
     };
     return (
         <div>
             <h1>Orders</h1>
+            {loadingDelete && <Loadingbox></Loadingbox>}
+            {errorDelete && <Messagebox variant="danger">{errorDelete}</Messagebox>}
             {loading ? (
                 <Loadingbox></Loadingbox>
             ) : error ? (
@@ -62,7 +75,7 @@ export default function OrderListPage(props) {
                                     <button
                                         type="button"
                                         className="small"
-                                        onclick={() => deleteHandler(order)}
+                                        onClick={() => deleteHandler(order)}
                                     >
                                         Delete
                                     </button>
