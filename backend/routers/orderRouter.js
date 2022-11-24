@@ -1,9 +1,21 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAuth } from '../utils.js';
+import { isAdmin, isAuth } from '../utils.js';
 
 const orderRouter = express.Router();
+orderRouter.get(
+    '/',
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        // get only name from user : Get id of user and load the only user information from user table or userid
+        //populate: 
+        const orders = await Order.find({}).populate('user', 'name');
+        console.log('orders info', orders);
+        res.send(orders);
+    })
+);
 orderRouter.get(
     '/mine',
     isAuth,

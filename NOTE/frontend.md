@@ -68,3 +68,17 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     1.  create delete api in backend
     2.  create delete constants, action and reducer
     3.  use it in product list screen
+42. List Orders
+    1. create order list api
+        OrderRouter--> get method
+            link '/' --> /orderlist/
+            isAuth // login =true
+            isAdmin
+            user find({}).populate(user, name)
+
+    2. create Order List Screen
+        create rout from config and routes folder --> when go to /orderlist -> call ortderlist page
+        dispatch->list orther to orderActions  -> call  listOrders --> dispatch orther reuqets --> call api --> getvalue return --> dispatch succes to reducer 
+    3. Add reducer to store
+        Chaneg state to store --> change state   --> go to home page  user efffer apply -> create 3 valuer loading succes fail in to orderlist 
+    4. show products on the screen

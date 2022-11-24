@@ -12,6 +12,7 @@ import OrderHistoryPage from '~/Pages/OrderHistory';
 import ProfilePage from '~/Pages/Profile';
 import ProductListPage from '~/Pages/ProductList';
 import ProductEditPage from '~/Pages/ProductEdit';
+import OrderListPage from '~/Pages/OrderList';
 
 // Layouts
 
@@ -33,7 +34,8 @@ const publicRoutes = [
     { path: config.routes.profile, component: ProfilePage, private: true },
     { path: config.routes.productList, component: ProductListPage, private: true, isAminPage: true, exact: true },
     { path: config.routes.productEdit, component: ProductEditPage, private: true, isAminPage: true },
-
+    { path: config.routes.orderList, component: OrderListPage, private: true, isAminPage: true },
+    
 ];
 console.log('publicRoutes', publicRoutes);
 const privateRoutes = [];
