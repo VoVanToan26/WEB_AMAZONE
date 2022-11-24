@@ -87,4 +87,15 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     Click delete -->  dispatch delete order to action  --> dispatch request  --> try call api delte (api/order/:id)-> dispatch delete success  to reducer --> reucer return state  {loading is fasle and success tru } --> chaneg state in useEffect hook  --> dispatch reset delete to rerender 
 44. Deliver Order
     1. create constant, actions and reducers for deliver order
-    2. add order deliver action to order details screen
+    2. add order deliver action to order details scree
+45. Publish To Heroku
+    1. Create git repository
+    2. Create heroku account
+    3. install Heroku CLI
+    4. heroku login
+    5. heroku apps:create <yourname>amazona
+    6. Edit package.json for build script
+    10. Create Procfile
+    12. Create mongodb atlas database
+    19. Set database connection in heroku env variables
+    20. Commit and push

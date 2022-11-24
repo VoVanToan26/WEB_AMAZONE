@@ -5,6 +5,7 @@
   "description": "��#\u0000 \u0000W\u0000E\u0000B\u0000_\u0000A\u0000M\u0000A\u0000Z\u0000O\u0000N\u0000E\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
+    "build":"cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -40,5 +41,6 @@
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
     "nodemon": "^2.0.20"
-  }
+  },
+   "engines": {"node":"12.4.0", "npm": "6.9.0"}
 }
