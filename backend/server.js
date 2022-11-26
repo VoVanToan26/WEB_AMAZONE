@@ -17,12 +17,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //through by 2 setting or 2 middleware
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1/fishing_web', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
-
+mongoose
+    .connect(
+        process.env.MONGODB_URL ||
+      'mongodb+srv://vantoan26:vantoan1@toan.hmtbaxg.mongodb.net/?retryWrites=true&w=majority',
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        }
+    )
+    .then(() => console.log('MongoDB Connected!'))
+    .catch((error) => console.log('MongoDB did not connect: ', error));
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
@@ -32,8 +37,19 @@ app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-app.use(express.static(path.join(__dirname, '/frontend/build')));
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/frontend/build/index.html')));
+// put a slash upload file to sever folder (slash-GPC)
+const __dirname = path.resolve(); // --> return current folder
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+// The build folder with static assets is the only output produced by Create React App.
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
+console.log(path.join(__dirname, 'frontend', 'build'));
+console.log(path.join(__dirname, 'frontend', 'build', 'index.html'));
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+    const index = path.join(__dirname, 'frontend', 'build', 'index.html');
+    res.sendFile(index);
+});
 // app.get('/', (req, res) => {
 //     res.send('Sever is ready');
 // });
@@ -41,8 +57,6 @@ app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 });
 // put a slash upload file to sever folder (slash-GPC)
-const __dirname = path.resolve();// --> return current folder
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 const port = process.env.PORT || 5000;
 console.log('port', port);
 app.listen(port, () => {
