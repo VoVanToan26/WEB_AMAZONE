@@ -14,20 +14,22 @@ import {
     PRODUCT_LIST_SUCCESS,
     PRODUCT_UPDATE_FAIL,
     PRODUCT_UPDATE_REQUEST,
-    PRODUCT_UPDATE_SUCCESS
-} from "~/constants/productConstants"
+    PRODUCT_UPDATE_SUCCESS,
+} from "~/constants/productConstants";
 
-export const listProducts = () => async (dispatch) => {
-    dispatch({
-        type: PRODUCT_LIST_REQUEST
-    })
-    try {
-        const { data } = await Axios.get('/api/products');
-        dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
-    } catch (error) {
-        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message })
-    }
-}
+export const listProducts =
+    ({ seller = "" }) =>
+    async (dispatch) => {
+        dispatch({
+            type: PRODUCT_LIST_REQUEST,
+        });
+        try {
+            const { data } = await Axios.get(`/api/products?seller=${seller}`);
+            dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+        } catch (error) {
+            dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+        }
+    };
 
 export const detailsProduct = (productId) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
@@ -51,16 +53,16 @@ export const createProduct = () => async (dispatch, getState) => {
         userSignin: { userInfo },
     } = getState();
     try {
-    //Call ajax --> userrouter.js --> 
+        //Call ajax --> userrouter.js -->
 
         const { data } = await Axios.post(
-            '/api/products',
+            "/api/products",
             {},
             {
                 headers: { Authorization: `Bearer ${userInfo.token}` },
-            }
+            },
         );
-        console.log('data', data)
+        console.log("data", data);
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
             payload: data.product,

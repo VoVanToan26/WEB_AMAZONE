@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { detailsUser, updateUserProfile } from '~/actions/userActions';
-import Loadingbox from '~/compenents/Loadingbox';
-import Messagebox from '~/compenents/Messagebox';
-import { USER_UPDATE_PROFILE_RESET } from '~/constants/userConstants';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { detailsUser, updateUserProfile } from "~/actions/userActions";
+import Loadingbox from "~/compenents/Loadingbox";
+import Messagebox from "~/compenents/Messagebox";
+import { USER_UPDATE_PROFILE_RESET } from "~/constants/userConstants";
 
 export default function ProfilePage() {
-    const [name, setName] = useState('');
-    console.log('name', name)
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [name, setName] = useState("");
+    console.log("name", name);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [sellerName, setSellerName] = useState("");
+    const [sellerLogo, setSellerLogo] = useState("");
+    const [sellerDescription, setSellerDescription] = useState("");
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const userDetails = useSelector((state) => state.userDetails);
     const { loading, error, user } = userDetails;
-    console.log('userDetails', userDetails)
+    console.log("userDetails", userDetails);
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
     const {
         success: successUpdate,
@@ -39,9 +42,19 @@ export default function ProfilePage() {
         e.preventDefault();
         // dispatch update profile
         if (password !== confirmPassword) {
-            alert('Password and Confirm Password Are Not Matched');
+            alert("Password and Confirm Password Are Not Matched");
         } else {
-            dispatch(updateUserProfile({ userId: user._id, name, email, password }));
+            dispatch(
+                updateUserProfile({
+                    userId: user._id,
+                    name,
+                    email,
+                    password,
+                    sellerName,
+                    sellerLogo,
+                    sellerDescription,
+                }),
+            );
         }
     };
     return (
@@ -57,13 +70,9 @@ export default function ProfilePage() {
                 ) : (
                     <>
                         {loadingUpdate && <Loadingbox></Loadingbox>}
-                        {errorUpdate && (
-                            <Messagebox variant="danger">{errorUpdate}</Messagebox>
-                        )}
+                        {errorUpdate && <Messagebox variant="danger">{errorUpdate}</Messagebox>}
                         {successUpdate && (
-                            <Messagebox variant="success">
-                                Profile Updated Successfully
-                            </Messagebox>
+                            <Messagebox variant="success">Profile Updated Successfully</Messagebox>
                         )}
                         <div>
                             <label htmlFor="name">Name</label>
@@ -103,6 +112,41 @@ export default function ProfilePage() {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             ></input>
                         </div>
+                        {user.isSeller && (
+                            <>
+                                <h2>Seller</h2>
+                                <div>
+                                    <label htmlFor="sellerName">Seller Name</label>
+                                    <input
+                                        id="sellerName"
+                                        type="text"
+                                        placeholder="Enter Seller Name"
+                                        value={sellerName}
+                                        onChange={(e) => setSellerName(e.target.value)}
+                                    ></input>
+                                </div>
+                                <div>
+                                    <label htmlFor="sellerLogo">Seller Logo</label>
+                                    <input
+                                        id="sellerLogo"
+                                        type="text"
+                                        placeholder="Enter Seller Logo"
+                                        value={sellerLogo}
+                                        onChange={(e) => setSellerLogo(e.target.value)}
+                                    ></input>
+                                </div>
+                                <div>
+                                    <label htmlFor="sellerDescription">Seller Description</label>
+                                    <input
+                                        id="sellerDescription"
+                                        type="text"
+                                        placeholder="Enter Seller Description"
+                                        value={sellerDescription}
+                                        onChange={(e) => setSellerDescription(e.target.value)}
+                                    ></input>
+                                </div>
+                            </>
+                        )}
                         <div>
                             <label />
                             <button className="primary" type="submit">

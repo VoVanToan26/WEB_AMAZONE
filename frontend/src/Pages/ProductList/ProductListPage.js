@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, deleteProduct, listProducts } from '~/actions/productActions';
-import LoadingBox from '~/compenents/Loadingbox';
-import Messagebox from '~/compenents/Messagebox';
-import { useNavigate } from 'react-router-dom';
-import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '~/constants/productConstants';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct, deleteProduct, listProducts } from "~/actions/productActions";
+import LoadingBox from "~/compenents/Loadingbox";
+import Messagebox from "~/compenents/Messagebox";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from "~/constants/productConstants";
 
-
-
-export default function ProductListPage(props) {
+export default function ProductListPage() {
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    const location = useLocation();
+    const sellerMode = location.search === "?seller";
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.productList);
     const productCreate = useSelector((state) => state.productCreate);
     const { loading, error, products } = productList;
-    console.log('productList', productList)
+    console.log("productList", productList);
     const {
         loading: loadingCreate,
         error: errorCreate,
@@ -22,16 +24,10 @@ export default function ProductListPage(props) {
         product: createdProduct,
     } = productCreate;
 
-
     const productDelete = useSelector((state) => state.productDelete);
-    const {
-        loading: loadingDelete,
-        error: errorDelete,
-        success: successDelete,
-    } = productDelete;
+    const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
 
-
-    console.log('productCreate', productCreate)
+    console.log("productCreate", productCreate);
     useEffect(() => {
         if (successCreate) {
             dispatch({ type: PRODUCT_CREATE_RESET });
@@ -40,18 +36,26 @@ export default function ProductListPage(props) {
         if (successDelete) {
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
-        dispatch(listProducts());
-    }, [createdProduct, dispatch, navigate, successCreate, successDelete]);
+        dispatch(listProducts({ seller: sellerMode ? userInfo._id : "" }));
+    }, [
+        createdProduct,
+        dispatch,
+        navigate,
+        sellerMode,
+        successCreate,
+        successDelete,
+        userInfo._id,
+    ]);
     const deleteHandler = (product) => {
         /// TODO: dispatch delete action
-        if (window.confirm('Are you sure to delete?')) {
+        if (window.confirm("Are you sure to delete?")) {
             dispatch(deleteProduct(product._id));
         }
     };
     const createHandler = () => {
         /// TODO dispatch add acttion
-        dispatch(createProduct())
-    }
+        dispatch(createProduct());
+    };
 
     return (
         <div>
@@ -90,9 +94,7 @@ export default function ProductListPage(props) {
                                     <button
                                         type="button"
                                         className="small"
-                                        onClick={() =>
-                                            navigate(`/product/${product._id}/edit`)
-                                        }
+                                        onClick={() => navigate(`/product/${product._id}/edit`)}
                                     >
                                         Edit
                                     </button>
