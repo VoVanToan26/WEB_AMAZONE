@@ -13,9 +13,7 @@ orderRouter.get(
         //populate:
         const seller = req.query.seller || "";
         const sellerFilter = seller ? { seller } : {};
-
         const orders = await Order.find({ ...sellerFilter }).populate("user", "name");
-
         console.log("orders info", orders);
         res.send(orders);
     }),

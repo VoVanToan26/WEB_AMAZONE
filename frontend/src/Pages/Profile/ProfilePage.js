@@ -36,6 +36,12 @@ export default function ProfilePage() {
         } else {
             setName(user.name);
             setEmail(user.email);
+            console.log('userInfo', userInfo.seller, userInfo)
+            if(user.seller){
+                setSellerName(user.seller.name);
+                setSellerLogo(user.seller.logo);
+                setSellerDescription(user.seller.description);
+            }
         }
     }, [dispatch, userInfo._id, user]);
     const submitHandler = (e) => {
@@ -112,6 +118,7 @@ export default function ProfilePage() {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             ></input>
                         </div>
+                        {/* show  seller input infomation */}
                         {user.isSeller && (
                             <>
                                 <h2>Seller</h2>

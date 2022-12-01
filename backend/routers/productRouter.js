@@ -11,9 +11,12 @@ productRouter.get(
     expressAsyncHandler(async (req, res) => {
         const seller = req.query.seller || "";
         const sellerFilter = seller ? { seller } : {};
-        const products = await Product.find({ ...sellerFilter });
+        const products = await Product.find({ ...sellerFilter }).populate(
+            "seller",
+            "seller.name seller.logo"
+        );
         res.send(products);
-    }),
+    })
 );
 
 productRouter.get(
@@ -22,19 +25,22 @@ productRouter.get(
         // await Product.remove({});
         const createdProducts = await Product.insertMany(data.products);
         res.send({ createdProducts });
-    }),
+    })
 );
 
 productRouter.get(
     "/:id",
     expressAsyncHandler(async (req, res) => {
-        const product = await Product.findById(req.params.id);
-        if (product) {
+        const product = await Product.findById(req.params.id).populate(
+            "seller",
+            "seller.name seller.logo seller.rating seller.numReviews"
+        );
+        if (product.seller) {
             res.send(product);
         } else {
             res.status(404).send({ message: "Product Not Found" });
         }
-    }),
+    })
 );
 productRouter.post(
     "/",
@@ -43,6 +49,7 @@ productRouter.post(
     expressAsyncHandler(async (req, res) => {
         const product = new Product({
             name: "samle name " + Date.now(),
+            seller: req.user._id,
             image: "/images/p1.jpg",
             price: 0,
             category: "sample category",
@@ -54,7 +61,7 @@ productRouter.post(
         });
         const createdProduct = await product.save();
         res.send({ message: "Product Created", product: createdProduct });
-    }),
+    })
 );
 productRouter.put(
     "/:id",
@@ -62,7 +69,7 @@ productRouter.put(
     isSellerOrAdmin,
     expressAsyncHandler(async (req, res) => {
         const product = await Product.findById(req.params.id);
-        console.log("product", product);
+        console.log("product put", product);
         if (product) {
             product.name = req.body.name;
             product.price = req.body.price;
@@ -76,7 +83,7 @@ productRouter.put(
         } else {
             res.status(404).send({ message: "Product Not Found" });
         }
-    }),
+    })
 );
 productRouter.delete(
     "/:id",
@@ -91,6 +98,6 @@ productRouter.delete(
         } else {
             res.status(404).send({ message: "Product Not Found" });
         }
-    }),
+    })
 );
 export default productRouter;

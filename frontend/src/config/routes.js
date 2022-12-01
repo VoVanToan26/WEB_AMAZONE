@@ -15,6 +15,7 @@ const routes = {
   productEdit: "/product/:id/edit",
   userList: "/userlist",
   userEdit: "/user/:id/edit",
+  seller: "/seller/:id",
 
   home: "/",
   // profile: '/@:nickname',

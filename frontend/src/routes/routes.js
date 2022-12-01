@@ -13,8 +13,9 @@ import ProfilePage from "~/Pages/Profile";
 import ProductListPage from "~/Pages/ProductList";
 import ProductEditPage from "~/Pages/ProductEdit";
 import OrderListPage from "~/Pages/OrderList";
-import UserListPage from "~/Pages/UserList/UserList";
-import userEditPage from "~/Pages/UserEdit/UserEditPage";
+import UserListPage from "~/Pages/UserList";
+import userEditPage from "~/Pages/UserEdit";
+import sellerPage from "~/Pages/SellerPage";
 
 // Layouts
 
@@ -67,6 +68,10 @@ const publicRoutes = [
     component: userEditPage,
     private: true,
     isAminPage: true,
+  },
+  {
+    path: config.routes.seller,
+    component: sellerPage,
   },
 ];
 console.log("publicRoutes", publicRoutes);

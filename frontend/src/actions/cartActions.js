@@ -16,6 +16,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
             price: data.price,
             countInStock: data.countInStock,
             product: data._id,
+            // we can only by from one celler
             seller: data.seller,
             qty,
         },

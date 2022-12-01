@@ -103,3 +103,8 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     1. build api for list users
     2. Create UserList Screen
     3. create order details constant, action and reducer
+    5. add Seller to Product List and Details Screen
+50. Create Seller Page
+    1. create seller page
+    2. update product component and product screen
+    3. update product routes

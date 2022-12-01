@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarSolid, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/fontawesome-free-regular';
 
-function Rating({ rating, numReviews }) {
-    console.log(rating);
+function Rating({ rating, numReviews=0 }) {
+    console.log('rate',rating, numReviews);
     return (
         <div className="rating">
             <span>

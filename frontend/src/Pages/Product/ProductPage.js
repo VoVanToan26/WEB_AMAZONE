@@ -58,6 +58,18 @@ const ProductPage = () => {
                                 </div>
                                 <div className="product-item  col-1">
                                     <div className="card card-body">
+                                        <li>
+                                            Seller{' '}
+                                            <h2>
+                                                <Link to={`/seller/${product.seller._id}`}>
+                                                    {product.seller.seller.name}
+                                                </Link>
+                                            </h2>
+                                            <Rating
+                                                rating={product.seller.seller.rating}
+                                                numReviews={product.seller.seller.numReviews}
+                                            ></Rating>
+                                        </li>
                                         <ul>
                                             <li>
                                                 <div className="row">
