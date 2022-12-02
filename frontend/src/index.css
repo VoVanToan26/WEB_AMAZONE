@@ -374,6 +374,11 @@ img.large {
 /* Carousel */
 .carousel .slide img {
   max-width: 30rem;
+  
+}
+a p.legend {
+  max-width: 10rem;
+  margin-left: -52px !important;
 }
 
 /* Search */

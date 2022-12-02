@@ -108,3 +108,7 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     1. create seller page
     2. update product component and product screen
     3. update product routes
++51. Add Top Seller Carousel+   
+ 1. install react carousel+  
+  2. implement actions and reducers for top sellers+ 
+     3. use react carousel with data in Home Screen
