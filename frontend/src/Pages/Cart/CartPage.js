@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '~/actions/cartActions';
-import Messagebox from '~/compenents/Messagebox';
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "~/actions/cartActions";
+import Messagebox from "~/compenents/Messagebox";
 
 function CartPage() {
-    const urlGetData = new URLSearchParams(window.location.search)
-    const props = useParams()
-    console.log('props', props)
+    const urlGetData = new URLSearchParams(window.location.search);
+    const props = useParams();
+    console.log("props", props);
 
     const productId = props.id;
-    const qty = urlGetData.get('qty') || 1
+    const qty = urlGetData.get("qty") || 1;
     const cart = useSelector((state) => state.cart);
 
-    const { cartItems } = cart;
+    const { cartItems, error } = cart;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -28,13 +28,14 @@ function CartPage() {
 
     const navigate = useNavigate();
     const checkoutHandler = () => {
-        navigate(`/signin?redirect=/shipping`)
+        navigate(`/signin?redirect=/shipping`);
     };
 
     return (
         <div className="row top">
             <div className="col-2">
                 <h1>Shopping Cart</h1>
+                {error && <Messagebox variant="danger">{error}</Messagebox>}
                 {cartItems.length === 0 ? (
                     <Messagebox>
                         Cart is empty. <Link to="/">Go Shopping</Link>
