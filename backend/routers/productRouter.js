@@ -10,16 +10,27 @@ productRouter.get(
     "/",
     expressAsyncHandler(async (req, res) => {
         const name = req.query.name || "";
+        const category = req.query.category || "";
         // option i phân biệt chữ hoa và thương
         const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
         const seller = req.query.seller || "";
         const sellerFilter = seller ? { seller } : {};
-        const products = await Product.find({ ...sellerFilter, ...nameFilter }).populate(
-            "seller",
-            "seller.name seller.logo",
-        );
+        const categoryFilter = category ? { category } : {};
+        const products = await Product.find({
+            ...sellerFilter,
+            ...nameFilter,
+            ...categoryFilter,
+        }).populate("seller", "seller.name seller.logo");
         res.send(products);
-    })
+    }),
+);
+// Lấy thông tin thể loại hàng hóa
+productRouter.get(
+    "/categories",
+    expressAsyncHandler(async (req, res) => {
+        const categories = await Product.find().distinct("category");
+        res.send(categories);
+    }),
 );
 
 productRouter.get(
@@ -28,7 +39,7 @@ productRouter.get(
         // await Product.remove({});
         const createdProducts = await Product.insertMany(data.products);
         res.send({ createdProducts });
-    })
+    }),
 );
 
 productRouter.get(
@@ -36,14 +47,14 @@ productRouter.get(
     expressAsyncHandler(async (req, res) => {
         const product = await Product.findById(req.params.id).populate(
             "seller",
-            "seller.name seller.logo seller.rating seller.numReviews"
+            "seller.name seller.logo seller.rating seller.numReviews",
         );
         if (product.seller) {
             res.send(product);
         } else {
             res.status(404).send({ message: "Product Not Found" });
         }
-    })
+    }),
 );
 productRouter.post(
     "/",
@@ -64,7 +75,7 @@ productRouter.post(
         });
         const createdProduct = await product.save();
         res.send({ message: "Product Created", product: createdProduct });
-    })
+    }),
 );
 productRouter.put(
     "/:id",
@@ -86,7 +97,7 @@ productRouter.put(
         } else {
             res.status(404).send({ message: "Product Not Found" });
         }
-    })
+    }),
 );
 productRouter.delete(
     "/:id",
@@ -101,6 +112,6 @@ productRouter.delete(
         } else {
             res.status(404).send({ message: "Product Not Found" });
         }
-    })
+    }),
 );
 export default productRouter;

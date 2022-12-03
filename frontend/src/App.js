@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import { publicRoutes } from "~/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCartShopping, faClose, faBars } from "@fortawesome/free-solid-svg-icons";
 import { signout } from "~/actions/userActions";
-import PrivateRoute from "./compenents/PrivateRoute/PrivateRoute";
-import SearchBox from "./compenents/SearchBox/SearchBox";
+import PrivateRoute from "./compenents/PrivateRoute";
+import SearchBox from "./compenents/SearchBox";
+import { listProductCategories } from "./actions/productActions";
+import LoadingBox from "./compenents/LoadingBox";
+import MessageBox from "./compenents/MessageBox";
+
 function App() {
+    const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
     // add count cart
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
@@ -18,11 +23,27 @@ function App() {
     const signoutHandler = () => {
         dispatch(signout());
     };
+
+    const productCategoryList = useSelector((state) => state.productCategoryList);
+    const { loading: loadingCategories, error: errorCategories, categories } = productCategoryList;
+    console.log("productCategoryList", productCategoryList);
+    useEffect(() => {
+        dispatch(listProductCategories());
+    }, [dispatch]);
+
     return (
         <Router>
             <div className="grid-container">
                 <header className="row">
                     <div>
+                        <button
+                            type="button"
+                            className="open-sidebar"
+                            onClick={() => setSidebarIsOpen(true)}
+                        >
+                            <FontAwesomeIcon icon={faBars} />
+                            <i className="fa fa-bars"></i>
+                        </button>
                         <Link className="brand" to="./">
                             Van Toan fishing
                         </Link>
@@ -114,6 +135,36 @@ function App() {
                         )}
                     </div>
                 </header>
+                <aside className={sidebarIsOpen ? "open" : ""}>
+                    <ul className="categories">
+                        <li>
+                            <strong>Categories</strong>
+                            <button
+                                onClick={() => setSidebarIsOpen(false)}
+                                className="close-sidebar"
+                                type="button"
+                            >
+                                <FontAwesomeIcon icon={faClose} />
+                            </button>
+                        </li>
+                        {loadingCategories ? (
+                            <LoadingBox></LoadingBox>
+                        ) : errorCategories ? (
+                            <MessageBox variant="danger">{errorCategories}</MessageBox>
+                        ) : (
+                            categories.map((c) => (
+                                <li key={c}>
+                                    <Link
+                                        to={`/search/category/${c}`}
+                                        onClick={() => setSidebarIsOpen(false)}
+                                    >
+                                        {c}
+                                    </Link>
+                                </li>
+                            ))
+                        )}
+                    </ul>
+                </aside>
                 <main>
                     <Routes>
                         {publicRoutes.map((route, index) => {

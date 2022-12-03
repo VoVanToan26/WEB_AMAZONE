@@ -79,6 +79,16 @@ const publicRoutes = [
         component: SearchPage,
         exact: true,
     },
+    {
+        path: config.routes.searchCategory,
+        component: SearchPage,
+        exact: true,
+    },
+    {
+        path: config.routes.searchCategoryName,
+        component: SearchPage,
+        exact: true,
+    },
 ];
 console.log("publicRoutes", publicRoutes);
 const privateRoutes = [];

@@ -17,7 +17,8 @@ const routes = {
     userEdit: "/user/:id/edit",
     seller: "/seller/:id",
     search: "/search/name/:name",
-
+    searchCategory: "/search/category/:category",
+    searchCategoryName: "/search/category/:category/name/:name",
     home: "/",
     // profile: '/@:nickname',
     // Upload: '/upload',
