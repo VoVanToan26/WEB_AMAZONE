@@ -3,15 +3,17 @@ import { LoadScript, GoogleMap, StandaloneSearchBox, Marker } from "@react-googl
 import Axios from "axios";
 import { USER_ADDRESS_MAP_CONFIRM } from "~/constants/userConstants";
 import { useDispatch } from "react-redux";
-import LoadingBox from "~/compenents/LoadingBox";
-
+import LoadingBox from "~/components/LoadingBox";
+import { useNavigate } from "react-router-dom";
 
 const libs = ["places"];
 const defaultLocation = { lat: 45.516, lng: -73.56 };
 
 export default function MapPage(props) {
+    const navigate = useNavigate();
     const [googleApiKey, setGoogleApiKey] = useState("");
     const [center, setCenter] = useState(defaultLocation);
+    // set default location is center of map
     const [location, setLocation] = useState(center);
 
     const mapRef = useRef(null);
@@ -65,7 +67,7 @@ export default function MapPage(props) {
                 },
             });
             alert("location selected successfully.");
-            props.history.push("/shipping");
+            navigate("/shipping");
         } else {
             alert("Please enter your address");
         }
@@ -87,7 +89,7 @@ export default function MapPage(props) {
             });
         }
     };
-
+    // check google apit key if ok render html code
     return googleApiKey ? (
         <div className="full-container">
             <LoadScript libraries={libs} googleMapsApiKey={googleApiKey}>

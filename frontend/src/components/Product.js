@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Rating from "../Rating/Rating";
+import Rating from "~/components/Rating";
 
 function Product({ product }) {
     return (

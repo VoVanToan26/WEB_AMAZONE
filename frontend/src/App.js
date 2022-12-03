@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCartShopping, faClose, faBars } from "@fortawesome/free-solid-svg-icons";
 import { signout } from "~/actions/userActions";
-import PrivateRoute from "./compenents/PrivateRoute";
-import SearchBox from "./compenents/SearchBox";
-import { listProductCategories } from "./actions/productActions";
-import LoadingBox from "./compenents/LoadingBox";
-import MessageBox from "./compenents/MessageBox";
+import { listProductCategories } from "~/actions/productActions";
+import SearchBox from "~/components/SearchBox";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
+import PrivateRoute from "~/components/PrivateRoute";
 
 function App() {
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -44,7 +44,7 @@ function App() {
                             <FontAwesomeIcon icon={faBars} />
                             <i className="fa fa-bars"></i>
                         </button>
-                        <Link className="brand" to="./">
+                        <Link className="brand" to="/">
                             Van Toan fishing
                         </Link>
                     </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Rating from "~/compenents/Rating";
+import Rating from "~/components/Rating";
 import { createReview, detailsProduct } from "~/actions/productActions";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
 
 const ProductPage = () => {
     //dispatch() is the method used to dispatch actions and trigger state changes to the store. react-redux is simply trying to give you convenient access to it
@@ -126,7 +126,7 @@ const ProductPage = () => {
                                                         >
                                                             {[
                                                                 ...Array(
-                                                                    product.countInStock,
+                                                                    product.countInStock
                                                                 ).keys(),
                                                             ].map((x) => (
                                                                 <option key={x + 1} value={x + 1}>

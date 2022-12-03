@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { signin } from "~/actions/userActions";
-import CheckoutSteps from "~/compenents/CheckoutSteps";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
+import CheckoutSteps from "~/components/CheckoutSteps";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
 
 export default function SigninPage() {
     var props = useLocation();

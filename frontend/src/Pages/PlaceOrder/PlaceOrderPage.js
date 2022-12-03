@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createOrder } from "~/actions/orderActions";
-import CheckoutSteps from "~/compenents/CheckoutSteps";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
+import CheckoutSteps from "~/components/CheckoutSteps";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
 import { ORDER_CREATE_RESET } from "~/constants/orderConstants";
 export default function PlaceOrderPage() {
     const navigate = useNavigate();

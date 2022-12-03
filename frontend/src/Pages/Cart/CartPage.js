@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "~/actions/cartActions";
-import MessageBox from "~/compenents/MessageBox/MessageBox";
+import MessageBox from "~/components/MessageBox";
 
 function CartPage() {
     const urlGetData = new URLSearchParams(window.location.search);
@@ -60,7 +60,7 @@ function CartPage() {
                                             value={item.qty}
                                             onChange={(e) =>
                                                 dispatch(
-                                                    addToCart(item.product, Number(e.target.value)),
+                                                    addToCart(item.product, Number(e.target.value))
                                                 )
                                             }
                                         >

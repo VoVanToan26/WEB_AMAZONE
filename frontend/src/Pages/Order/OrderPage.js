@@ -4,8 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { deliverOrder, detailsOrder, payOrder } from "~/actions/orderActions";
 import Axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from "~/constants/orderConstants";
 
 export default function OrderPage() {

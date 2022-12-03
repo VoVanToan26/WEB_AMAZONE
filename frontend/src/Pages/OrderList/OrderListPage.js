@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteOrders, listOrders } from "~/actions/orderActions";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ORDER_DELETE_RESET } from "~/constants/orderConstants";
 

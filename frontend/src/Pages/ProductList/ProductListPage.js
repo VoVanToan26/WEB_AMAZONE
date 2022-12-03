@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct, deleteProduct, listProducts } from "~/actions/productActions";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from "~/constants/productConstants";
 

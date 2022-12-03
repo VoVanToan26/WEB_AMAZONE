@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MessageBox from "~/compenents/MessageBox";
+import MessageBox from "~/components/MessageBox";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import LoadingBox from "~/compenents/LoadingBox";
+import LoadingBox from "~/components/LoadingBox";
 import { USER_UPDATE_RESET } from "~/constants/userConstants";
 import { detailsUser, updateUser } from "~/actions/userActions";
 
@@ -62,7 +62,7 @@ export default function userEditPage() {
                 email,
                 isSeller,
                 isAdmin,
-            }),
+            })
         );
     };
 

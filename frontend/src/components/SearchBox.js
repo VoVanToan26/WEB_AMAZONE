@@ -20,7 +20,7 @@ export default function SearchBox() {
                 ></input>
                 <button className="primary" type="submit">
                     <i className="fa fa-search"></i>
-                    <FontAwesomeIcon  icon={faSearch} />
+                    <FontAwesomeIcon icon={faSearch} />
                 </button>
             </div>
         </form>

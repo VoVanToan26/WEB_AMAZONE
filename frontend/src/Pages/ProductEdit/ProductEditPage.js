@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MessageBox from "~/compenents/MessageBox";
+import MessageBox from "~/components/MessageBox";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { detailsProduct, updateProduct } from "~/actions/productActions";
-import LoadingBox from "~/compenents/LoadingBox";
+import LoadingBox from "~/components/LoadingBox";
 import { PRODUCT_UPDATE_RESET } from "~/constants/productConstants";
 import Axios from "axios";
 
@@ -60,7 +60,7 @@ export default function ProductEditPage() {
                 brand,
                 countInStock,
                 description,
-            }),
+            })
         );
     };
     const [loadingUpload, setLoadingUpload] = useState(false);

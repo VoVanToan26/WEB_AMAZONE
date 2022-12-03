@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { savePaymentMethod } from '~/actions/cartActions';
-import CheckoutSteps from '~/compenents/CheckoutSteps';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { savePaymentMethod } from "~/actions/cartActions";
+import CheckoutSteps from "~/components/CheckoutSteps";
 
 export default function PaymentPage() {
     var props = useLocation();
@@ -11,14 +11,14 @@ export default function PaymentPage() {
     const cart = useSelector((state) => state.cart);
     const { shippingAddress } = cart;
     if (!shippingAddress.address) {
-        navigate('/shipping');
+        navigate("/shipping");
     }
-    const [paymentMethod, setPayment] = useState('PayPal');
+    const [paymentMethod, setPayment] = useState("PayPal");
     const dispatch = useDispatch();
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(savePaymentMethod(paymentMethod));
-        navigate('/placeorder');
+        navigate("/placeorder");
     };
     return (
         <div>

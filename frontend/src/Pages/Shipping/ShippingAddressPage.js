@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "~/actions/cartActions";
 import { useNavigate, useLocation } from "react-router-dom";
-import CheckoutSteps from "~/compenents/CheckoutSteps";
+import CheckoutSteps from "~/components/CheckoutSteps";
 
 export default function ShippingAddressPage() {
     // var props = useLocation();
@@ -53,7 +53,7 @@ export default function ShippingAddressPage() {
                     country,
                     lat: newLat,
                     lng: newLng,
-                }),
+                })
             );
             navigate("/map");
         }
@@ -70,7 +70,7 @@ export default function ShippingAddressPage() {
                 country,
                 lat,
                 lng,
-            }),
+            })
         );
         navigate("/map");
     };

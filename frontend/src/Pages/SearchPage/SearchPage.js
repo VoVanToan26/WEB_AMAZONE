@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { listProducts } from "~/actions/productActions";
-import LoadingBox from "~/compenents/LoadingBox";
-import MessageBox from "~/compenents/MessageBox";
-import Product from "~/compenents/Product";
-import Rating from "~/compenents/Rating/Rating";
+import LoadingBox from "~/components/LoadingBox";
+import MessageBox from "~/components/MessageBox";
+import Product from "~/components/Product";
+import Rating from "~/components/Rating";
 import { prices, ratings } from "~/utils";
 
 export default function SearchPage() {
@@ -33,7 +33,7 @@ export default function SearchPage() {
                 max,
                 rating,
                 order,
-            }),
+            })
         );
     }, [category, dispatch, max, min, name, order, rating]);
 
