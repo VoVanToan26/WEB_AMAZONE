@@ -21,15 +21,15 @@ import {
 } from "~/constants/productConstants";
 
 export const listProducts =
-    ({ seller = "", name = "", category = "" }) =>
+    ({ seller = "", name = "", category = "", order = "", min = 0, max = 0, rating = 0 }) =>
     async (dispatch) => {
         dispatch({
             type: PRODUCT_LIST_REQUEST,
         });
+
         try {
-            const { data } = await Axios.get(
-                `/api/products?seller=${seller}&name=${name}&category=${category}`,
-            );
+            var link = `/api/products?seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`;
+            const { data } = await Axios.get(link);
             dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
         } catch (error) {
             dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });

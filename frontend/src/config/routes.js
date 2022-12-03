@@ -16,9 +16,11 @@ const routes = {
     userList: "/userlist",
     userEdit: "/user/:id/edit",
     seller: "/seller/:id",
-    search: "/search/name/:name",
+    search: "/search/name",
     searchCategory: "/search/category/:category",
     searchCategoryName: "/search/category/:category/name/:name",
+    searchAll:
+        "/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order",
     home: "/",
     // profile: '/@:nickname',
     // Upload: '/upload',
