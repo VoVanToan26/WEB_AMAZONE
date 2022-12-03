@@ -14,12 +14,12 @@ productRouter.get(
         const category = req.query.category || "";
         const seller = req.query.seller || "";
         const order = req.query.order || "";
-        
+
         const min = req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
         const max = req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
         const rating =
             req.query.rating && Number(req.query.rating) !== 0 ? Number(req.query.rating) : 0;
-        
+
         const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
         const sellerFilter = seller ? { seller } : {};
         const categoryFilter = category ? { category } : {};
@@ -70,7 +70,7 @@ productRouter.get(
     expressAsyncHandler(async (req, res) => {
         const product = await Product.findById(req.params.id).populate(
             "seller",
-            "seller.name seller.logo seller.rating seller.numReviews",
+            "seller.name seller.logo seller.rating seller.numberReviews",
         );
         if (product.seller) {
             res.send(product);
@@ -93,7 +93,7 @@ productRouter.post(
             brand: "sample brand",
             countInStock: 0,
             rating: 0,
-            numReviews: 0,
+            numberReviews: 0,
             description: "sample description",
         });
         const createdProduct = await product.save();
@@ -137,4 +137,38 @@ productRouter.delete(
         }
     }),
 );
+// posst review
+productRouter.post(
+    "/:id/reviews",
+    isAuth,
+    expressAsyncHandler(async (req, res) => {
+        const productId = req.params.id;
+        const product = await Product.findById(productId);
+        if (product) {
+            // if (product.reviews.find((x) => x.name === req.user.name)) {
+            //     return res.status(400).send({ message: "You already submitted a review" });
+            // }
+
+            const review = {
+                name: req.user.name,
+                rating: Number(req.body.rating),
+                comment: req.body.comment,
+            };
+            product.reviews.push(review);
+            product.numberReviews = product.reviews.length;
+            // tính số sao
+            product.rating =
+                product.reviews.reduce((a, c) => c.rating + a, 0) / product.reviews.length;
+            const updatedProduct = await product.save();
+            console.log("reviews", product);
+            res.status(201).send({
+                message: "Review Created",
+                review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+            });
+        } else {
+            res.status(404).send({ message: "Product Not Found" });
+        }
+    }),
+);
+
 export default productRouter;
