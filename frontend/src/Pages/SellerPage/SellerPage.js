@@ -47,7 +47,7 @@ export default function SellerPage() {
                         <li>
                             <Rating
                                 rating={user.seller.rating}
-                                numReviews={user.seller.numReviews}
+                                numberReviews={user.seller.numberReviews}
                             ></Rating>
                         </li>
                         <li>

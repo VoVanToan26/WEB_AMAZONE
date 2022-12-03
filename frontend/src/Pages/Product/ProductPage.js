@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Rating from "~/compenents/Rating";
-import { detailsProduct } from "~/actions/productActions";
+import { createReview, detailsProduct } from "~/actions/productActions";
 import LoadingBox from "~/compenents/LoadingBox";
 import MessageBox from "~/compenents/MessageBox";
 
@@ -22,10 +22,33 @@ const ProductPage = () => {
         navigate(`/cart/${productId}?qty=${qty}`);
     };
     console.log("detailsProduct", detailsProduct);
+
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+    // get state review create
+    const productReviewCreate = useSelector((state) => state.productReviewCreate);
+    const {
+        loading: loadingReviewCreate,
+        error: errorReviewCreate,
+        success: successReviewCreate,
+    } = productReviewCreate;
+
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (comment && rating) {
+            dispatch(createReview(productId, { rating, comment, name: userInfo.name }));
+        } else {
+            alert("Please enter comment and rating");
+        }
+    };
+
     // hook
     useEffect(() => {
         dispatch(detailsProduct(productId));
-    }, [dispatch, productId]);
+    }, [dispatch, productId, successReviewCreate]);
 
     return (
         <div>
@@ -48,7 +71,7 @@ const ProductPage = () => {
                                 <li>
                                     <Rating
                                         rating={product.rating}
-                                        numReviews={product.numReviews || "0"}
+                                        numberReviews={product.numberReviews || "0"}
                                     ></Rating>
                                 </li>
                                 <li>Pirce : ${product.price}</li>
@@ -69,7 +92,7 @@ const ProductPage = () => {
                                     </h2>
                                     <Rating
                                         rating={product.seller.seller.rating}
-                                        numReviews={product.seller.seller.numReviews}
+                                        numberReviews={product.seller.seller.numberReviews}
                                     ></Rating>
                                 </li>
                                 <ul>
@@ -127,6 +150,72 @@ const ProductPage = () => {
                                 </ul>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <h2 id="reviews">Reviews</h2>
+                        {product.reviews.length === 0 && (
+                            <MessageBox>There is no review</MessageBox>
+                        )}
+                        <ul>
+                            {product.reviews.map((review) => (
+                                <li key={review._id}>
+                                    <strong>{review.name}</strong>
+                                    <Rating rating={review.rating} caption=" "></Rating>
+                                    <p>{review.createdAt.substring(0, 10)}</p>
+                                    <p>{review.comment}</p>
+                                </li>
+                            ))}
+                            <li>
+                                {userInfo ? (
+                                    <form className="form" onSubmit={submitHandler}>
+                                        <div>
+                                            <h2>Write a customer review</h2>
+                                        </div>
+                                        <div>
+                                            <label htmlFor="rating">Rating</label>
+                                            <select
+                                                id="rating"
+                                                value={rating}
+                                                onChange={(e) => setRating(e.target.value)}
+                                            >
+                                                <option value="">Select...</option>
+                                                <option value="1">1- Poor</option>
+                                                <option value="2">2- Fair</option>
+                                                <option value="3">3- Good</option>
+                                                <option value="4">4- Very good</option>
+                                                <option value="5">5- Excelent</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label htmlFor="comment">Comment</label>
+                                            <textarea
+                                                id="comment"
+                                                value={comment}
+                                                onChange={(e) => setComment(e.target.value)}
+                                            ></textarea>
+                                        </div>
+                                        <div>
+                                            <label />
+                                            <button className="primary" type="submit">
+                                                Submit
+                                            </button>
+                                        </div>
+                                        <div>
+                                            {loadingReviewCreate && <LoadingBox></LoadingBox>}
+                                            {errorReviewCreate && (
+                                                <MessageBox variant="danger">
+                                                    {errorReviewCreate}
+                                                </MessageBox>
+                                            )}
+                                        </div>
+                                    </form>
+                                ) : (
+                                    <MessageBox>
+                                        Please <Link to="/signin">Sign In</Link> to write a review
+                                    </MessageBox>
+                                )}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             )}

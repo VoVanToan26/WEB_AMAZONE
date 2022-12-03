@@ -1,10 +1,10 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as faStarSolid, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faStarRegular } from '@fortawesome/fontawesome-free-regular';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarRegular } from "@fortawesome/fontawesome-free-regular";
 
-function Rating({ rating, numReviews = 0, caption }) {
-    console.log("rate", rating, numReviews, caption);
+function Rating({ rating, numberReviews = 0, caption }) {
+    console.log("rate", rating, numberReviews, caption);
     return (
         <div className="rating">
             <span>
@@ -23,7 +23,7 @@ function Rating({ rating, numReviews = 0, caption }) {
                         />
                     ))}
             </span>
-            {caption ? <span>{caption}</span> : <span>{numReviews + " reviews"}</span>}
+            {caption ? <span>{caption}</span> : <span>{numberReviews + " reviews"}</span>}
         </div>
     );
 }

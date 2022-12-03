@@ -118,3 +118,4 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     3. handle submit form
     4. edit parse url to get query string
     5. update product list api for search by name
+56 there is newreview 
