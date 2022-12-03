@@ -112,3 +112,9 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
  1. install react carousel+  
   2. implement actions and reducers for top sellers+ 
      3. use react carousel with data in Home Screen
+53. Create Search Box and Search Screen
+    1. create search bar in Header.js
+    2. add style
+    3. handle submit form
+    4. edit parse url to get query string
+    5. update product list api for search by name

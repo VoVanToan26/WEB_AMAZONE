@@ -14,8 +14,9 @@ import ProductListPage from "~/Pages/ProductList";
 import ProductEditPage from "~/Pages/ProductEdit";
 import OrderListPage from "~/Pages/OrderList";
 import UserListPage from "~/Pages/UserList";
-import userEditPage from "~/Pages/UserEdit";
-import sellerPage from "~/Pages/SellerPage";
+import UserEditPage from "~/Pages/UserEdit";
+import SellerPage from "~/Pages/SellerPage";
+import SearchPage from "~/Pages/SearchPage";
 
 // Layouts
 
@@ -23,56 +24,61 @@ import sellerPage from "~/Pages/SellerPage";
 
 // Public routes
 const publicRoutes = [
-  { path: config.routes.home, component: HomePage },
-  { path: config.routes.product, component: ProductPage },
-  { path: config.routes.cart, component: CartPage },
-  { path: config.routes.cartAll, component: CartPage },
-  { path: config.routes.signin, component: SigninPage },
-  { path: config.routes.register, component: RegisterPage },
-  { path: config.routes.shipping, component: ShippingAddressPage },
-  { path: config.routes.payment, component: PaymentPage },
-  { path: config.routes.placeOrder, component: PlaceOrderPage },
-  { path: config.routes.order, component: OrderPage },
-  { path: config.routes.orderHistory, component: OrderHistoryPage },
-  { path: config.routes.profile, component: ProfilePage, private: true },
-  {
-    path: config.routes.productList,
-    component: ProductListPage,
-    private: true,
-    isAminPage: true,
-    isSellerPage: true,
-    exact: true,
-  },
+    { path: config.routes.home, component: HomePage },
+    { path: config.routes.product, component: ProductPage },
+    { path: config.routes.cart, component: CartPage },
+    { path: config.routes.cartAll, component: CartPage },
+    { path: config.routes.signin, component: SigninPage },
+    { path: config.routes.register, component: RegisterPage },
+    { path: config.routes.shipping, component: ShippingAddressPage },
+    { path: config.routes.payment, component: PaymentPage },
+    { path: config.routes.placeOrder, component: PlaceOrderPage },
+    { path: config.routes.order, component: OrderPage },
+    { path: config.routes.orderHistory, component: OrderHistoryPage },
+    { path: config.routes.profile, component: ProfilePage, private: true },
+    {
+        path: config.routes.productList,
+        component: ProductListPage,
+        private: true,
+        isAminPage: true,
+        isSellerPage: true,
+        exact: true,
+    },
 
-  {
-    path: config.routes.productEdit,
-    component: ProductEditPage,
-    private: true,
-    isAminPage: true,
-  },
-  {
-    path: config.routes.orderList,
-    component: OrderListPage,
-    private: true,
-    isAminPage: true,
-    isSellerPage: true,
-  },
-  {
-    path: config.routes.userList,
-    component: UserListPage,
-    private: true,
-    isAminPage: true,
-  },
-  {
-    path: config.routes.userEdit,
-    component: userEditPage,
-    private: true,
-    isAminPage: true,
-  },
-  {
-    path: config.routes.seller,
-    component: sellerPage,
-  },
+    {
+        path: config.routes.productEdit,
+        component: ProductEditPage,
+        private: true,
+        isAminPage: true,
+    },
+    {
+        path: config.routes.orderList,
+        component: OrderListPage,
+        private: true,
+        isAminPage: true,
+        isSellerPage: true,
+    },
+    {
+        path: config.routes.userList,
+        component: UserListPage,
+        private: true,
+        isAminPage: true,
+    },
+    {
+        path: config.routes.userEdit,
+        component: UserEditPage,
+        private: true,
+        isAminPage: true,
+    },
+    {
+        path: config.routes.seller,
+        component: SellerPage,
+    },
+    {
+        path: config.routes.search,
+        component: SearchPage,
+        exact: true,
+    },
 ];
 console.log("publicRoutes", publicRoutes);
 const privateRoutes = [];

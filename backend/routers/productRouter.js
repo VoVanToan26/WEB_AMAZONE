@@ -9,11 +9,14 @@ const productRouter = express.Router();
 productRouter.get(
     "/",
     expressAsyncHandler(async (req, res) => {
+        const name = req.query.name || "";
+        // option i phân biệt chữ hoa và thương
+        const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
         const seller = req.query.seller || "";
         const sellerFilter = seller ? { seller } : {};
-        const products = await Product.find({ ...sellerFilter }).populate(
+        const products = await Product.find({ ...sellerFilter, ...nameFilter }).populate(
             "seller",
-            "seller.name seller.logo"
+            "seller.name seller.logo",
         );
         res.send(products);
     })
