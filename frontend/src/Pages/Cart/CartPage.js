@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "~/actions/cartActions";
-import Messagebox from "~/compenents/Messagebox";
+import MessageBox from "~/compenents/MessageBox/MessageBox";
 
 function CartPage() {
     const urlGetData = new URLSearchParams(window.location.search);
@@ -35,11 +35,11 @@ function CartPage() {
         <div className="row top">
             <div className="col-2">
                 <h1>Shopping Cart</h1>
-                {error && <Messagebox variant="danger">{error}</Messagebox>}
+                {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {cartItems.length === 0 ? (
-                    <Messagebox>
+                    <MessageBox>
                         Cart is empty. <Link to="/">Go Shopping</Link>
-                    </Messagebox>
+                    </MessageBox>
                 ) : (
                     <ul>
                         {cartItems.map((item) => (
@@ -60,7 +60,7 @@ function CartPage() {
                                             value={item.qty}
                                             onChange={(e) =>
                                                 dispatch(
-                                                    addToCart(item.product, Number(e.target.value))
+                                                    addToCart(item.product, Number(e.target.value)),
                                                 )
                                             }
                                         >

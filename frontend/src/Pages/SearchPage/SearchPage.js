@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { listProducts } from "~/actions/productActions";
-import LoadingBox from "~/compenents/Loadingbox";
-import MessageBox from "~/compenents/Messagebox";
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
 import Product from "~/compenents/Product";
 
 export default function SearchPage() {

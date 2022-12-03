@@ -1,45 +1,39 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Messagebox from '~/compenents/Messagebox';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { detailsProduct, updateProduct } from '~/actions/productActions';
-import Loadingbox from '~/compenents/Loadingbox';
-import { PRODUCT_UPDATE_RESET } from '~/constants/productConstants';
-import Axios from 'axios';
-
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import MessageBox from "~/compenents/MessageBox";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { detailsProduct, updateProduct } from "~/actions/productActions";
+import LoadingBox from "~/compenents/LoadingBox";
+import { PRODUCT_UPDATE_RESET } from "~/constants/productConstants";
+import Axios from "axios";
 
 export default function ProductEditPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [image, setImage] = useState('');
-    const [category, setCategory] = useState('');
-    const [brand, setBrand] = useState('');
-    const [countInStock, setCountInStock] = useState('');
-    const [description, setDescription] = useState('');
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [image, setImage] = useState("");
+    const [category, setCategory] = useState("");
+    const [brand, setBrand] = useState("");
+    const [countInStock, setCountInStock] = useState("");
+    const [description, setDescription] = useState("");
 
     const productDetails = useSelector((state) => state.productDetails);
     const { loading, error, product } = productDetails;
     //get state when update product
     const productUpdate = useSelector((state) => state.productUpdate);
-    const {
-        loading: loadingUpdate,
-        error: errorUpdate,
-        success: successUpdate,
-    } = productUpdate;
-    // get id from link 
+    const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate;
+    // get id from link
     var props = useParams();
     const productId = props.id;
     // get product detail when no have product or shet input value  when have product
     useEffect(() => {
         // if update success redirect to /product
         if (successUpdate) {
-            navigate('/productlist');
+            navigate("/productlist");
         }
-        // if !product or update success reset oriuct 
+        // if !product or update success reset oriuct
         if (!product || product._id !== productId || successUpdate) {
             dispatch({ type: PRODUCT_UPDATE_RESET });
             dispatch(detailsProduct(productId));
@@ -51,26 +45,26 @@ export default function ProductEditPage() {
             setCountInStock(product.countInStock);
             setBrand(product.brand);
             setDescription(product.description);
-            console.log(product.price)
-
+            console.log(product.price);
         }
     }, [product, dispatch, productId, successUpdate, navigate]);
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(updateProduct({
-            _id: productId,
-            name,
-            price,
-            image,
-            category,
-            brand,
-            countInStock,
-            description,
-        })
-        )
+        dispatch(
+            updateProduct({
+                _id: productId,
+                name,
+                price,
+                image,
+                category,
+                brand,
+                countInStock,
+                description,
+            }),
+        );
     };
     const [loadingUpload, setLoadingUpload] = useState(false);
-    const [errorUpload, setErrorUpload] = useState('');
+    const [errorUpload, setErrorUpload] = useState("");
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -79,14 +73,14 @@ export default function ProductEditPage() {
         const file = e.target.files[0];
         // create form data
         const bodyFormData = new FormData();
-        bodyFormData.append('image', file);
+        bodyFormData.append("image", file);
         // change value loadingUpload
         setLoadingUpload(true);
         try {
             // get data fro
-            const { data } = await Axios.post('/api/uploads', bodyFormData, {
+            const { data } = await Axios.post("/api/uploads", bodyFormData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${userInfo.token}`,
                 },
             });
@@ -104,9 +98,9 @@ export default function ProductEditPage() {
                     <h1>Edit Product {productId}</h1>
                 </div>
                 {loading ? (
-                    <Loadingbox></Loadingbox>
+                    <LoadingBox></LoadingBox>
                 ) : error ? (
-                    <Messagebox variant="danger">{error}</Messagebox>
+                    <MessageBox variant="danger">{error}</MessageBox>
                 ) : (
                     <>
                         <div>
@@ -147,10 +141,8 @@ export default function ProductEditPage() {
                                 label="Choose Image"
                                 onChange={uploadFileHandler}
                             ></input>
-                            {loadingUpload && <Loadingbox></Loadingbox>}
-                            {errorUpload && (
-                                <Messagebox variant="danger">{errorUpload}</Messagebox>
-                            )}
+                            {loadingUpload && <LoadingBox></LoadingBox>}
+                            {errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox>}
                         </div>
                         <div>
                             <label htmlFor="category">Category</label>

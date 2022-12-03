@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { signin } from '~/actions/userActions';
-import CheckoutSteps from '~/compenents/CheckoutSteps';
-import Loadingbox from '~/compenents/Loadingbox';
-import Messagebox from '~/compenents/Messagebox';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { signin } from "~/actions/userActions";
+import CheckoutSteps from "~/compenents/CheckoutSteps";
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
 
 export default function SigninPage() {
-    var props = useLocation()
-
+    var props = useLocation();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const redirect = props.search
-        ? props.search.split('=')[1]
-        : '/';
+    const redirect = props.search ? props.search.split("=")[1] : "/";
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo, loading, error } = userSignin;
-
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -30,18 +26,18 @@ export default function SigninPage() {
     };
     useEffect(() => {
         if (userInfo) {
-            navigate(redirect)
+            navigate(redirect);
         }
     }, [navigate, redirect, userInfo]);
     return (
         <div>
-            <CheckoutSteps step1 ></CheckoutSteps>
+            <CheckoutSteps step1></CheckoutSteps>
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Sign In</h1>
                 </div>
-                {loading && <Loadingbox></Loadingbox>}
-                {error && <Messagebox variant="danger">{error}</Messagebox>}
+                {loading && <LoadingBox></LoadingBox>}
+                {error && <MessageBox variant="danger">{error}</MessageBox>}
                 <div>
                     <label htmlFor="email">Email address</label>
                     <input
@@ -71,10 +67,8 @@ export default function SigninPage() {
                 <div>
                     <label />
                     <div>
-                        New customer?{' '}
-                        <Link to={`/register?redirect=${redirect}`}>
-                            Create your account
-                        </Link>
+                        New customer?{" "}
+                        <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
                     </div>
                 </div>
             </form>

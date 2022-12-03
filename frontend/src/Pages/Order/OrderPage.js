@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { deliverOrder, detailsOrder, payOrder } from '~/actions/orderActions';
-import Axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { deliverOrder, detailsOrder, payOrder } from "~/actions/orderActions";
+import Axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
-import Loadingbox from '~/compenents/Loadingbox';
-import Messagebox from '~/compenents/Messagebox';
-import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '~/constants/orderConstants';
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
+import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from "~/constants/orderConstants";
 
 export default function OrderPage() {
     const orderId = useParams().id;
@@ -20,25 +20,16 @@ export default function OrderPage() {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
 
-    const {
-        loading: loadingPay,
-        error: errorPay,
-        success: successPay,
-    } = orderPay;
+    const { loading: loadingPay, error: errorPay, success: successPay } = orderPay;
 
     const orderDeliver = useSelector((state) => state.orderDeliver);
-    const {
-        loading: loadingDeliver,
-        error: errorDeliver,
-        success: successDeliver,
-    } = orderDeliver;
+    const { loading: loadingDeliver, error: errorDeliver, success: successDeliver } = orderDeliver;
 
     useEffect(() => {
-
         const addPayPalScript = async () => {
-            const { data } = await Axios.get('/api/config/paypal');
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
+            const { data } = await Axios.get("/api/config/paypal");
+            const script = document.createElement("script");
+            script.type = "text/javascript";
             script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
             script.async = true;
             script.onload = () => {
@@ -46,12 +37,7 @@ export default function OrderPage() {
             };
             document.body.appendChild(script);
         };
-        if (
-            !order ||
-            successPay ||
-            successDeliver ||
-            (order && order._id !== orderId)
-        ) {
+        if (!order || successPay || successDeliver || (order && order._id !== orderId)) {
             dispatch({ type: ORDER_PAY_RESET });
             dispatch({ type: ORDER_DELIVER_RESET });
             dispatch(detailsOrder(orderId));
@@ -69,15 +55,14 @@ export default function OrderPage() {
     const successPaymentHandler = (paymentResult) => {
         // TODO: dispatch pay order
         dispatch(payOrder(order, paymentResult));
-
     };
     const deliverHandler = () => {
         dispatch(deliverOrder(order._id));
     };
     return loading ? (
-        <Loadingbox></Loadingbox>
+        <LoadingBox></LoadingBox>
     ) : error ? (
-        <Messagebox variant="danger">{error}</Messagebox>
+        <MessageBox variant="danger">{error}</MessageBox>
     ) : (
         <div>
             <h1>Order {order._id}</h1>
@@ -90,16 +75,15 @@ export default function OrderPage() {
                                 <p>
                                     <strong>Name:</strong> {order.shippingAddress.fullName} <br />
                                     <strong>Address: </strong> {order.shippingAddress.address},
-                                    {order.shippingAddress.city},{' '}
-                                    {order.shippingAddress.postalCode},
-                                    {order.shippingAddress.country}
+                                    {order.shippingAddress.city}, {order.shippingAddress.postalCode}
+                                    ,{order.shippingAddress.country}
                                 </p>
                                 {order.isDelivered ? (
-                                    <Messagebox variant="success">
+                                    <MessageBox variant="success">
                                         Delivered at {order.deliveredAt}
-                                    </Messagebox>
+                                    </MessageBox>
                                 ) : (
-                                    <Messagebox variant="danger">Not Delivered</Messagebox>
+                                    <MessageBox variant="danger">Not Delivered</MessageBox>
                                 )}
                             </div>
                         </li>
@@ -110,11 +94,11 @@ export default function OrderPage() {
                                     <strong>Method:</strong> {order.paymentMethod}
                                 </p>
                                 {order.isPaid ? (
-                                    <Messagebox variant="success">
+                                    <MessageBox variant="success">
                                         Paid at {order.paidAt}
-                                    </Messagebox>
+                                    </MessageBox>
                                 ) : (
-                                    <Messagebox variant="danger">Not Paid</Messagebox>
+                                    <MessageBox variant="danger">Not Paid</MessageBox>
                                 )}
                             </div>
                         </li>
@@ -139,7 +123,8 @@ export default function OrderPage() {
                                                 </div>
 
                                                 <div>
-                                                    {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                    {item.qty} x ${item.price} = $
+                                                    {item.qty * item.price}
                                                 </div>
                                             </div>
                                         </li>
@@ -186,13 +171,13 @@ export default function OrderPage() {
                             {!order.isPaid && (
                                 <li>
                                     {!sdkReady ? (
-                                        <Loadingbox></Loadingbox>
+                                        <LoadingBox></LoadingBox>
                                     ) : (
                                         <>
                                             {errorPay && (
-                                                <Messagebox variant="danger">{errorPay}</Messagebox>
+                                                <MessageBox variant="danger">{errorPay}</MessageBox>
                                             )}
-                                            {loadingPay && <Loadingbox></Loadingbox>}
+                                            {loadingPay && <LoadingBox></LoadingBox>}
 
                                             <PayPalButton
                                                 amount={order.totalPrice}
@@ -204,9 +189,9 @@ export default function OrderPage() {
                             )}
                             {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                 <li>
-                                    {loadingDeliver && <Loadingbox></Loadingbox>}
+                                    {loadingDeliver && <LoadingBox></LoadingBox>}
                                     {errorDeliver && (
-                                        <Messagebox variant="danger">{errorDeliver}</Messagebox>
+                                        <MessageBox variant="danger">{errorDeliver}</MessageBox>
                                     )}
                                     <button
                                         type="button"

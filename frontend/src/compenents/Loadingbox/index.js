@@ -1,1 +1,1 @@
-export { default } from './Loadingbox';
+export { default } from "./LoadingBox";

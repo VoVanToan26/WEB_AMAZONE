@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct, deleteProduct, listProducts } from "~/actions/productActions";
-import LoadingBox from "~/compenents/Loadingbox";
-import Messagebox from "~/compenents/Messagebox";
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from "~/constants/productConstants";
 
@@ -65,11 +65,11 @@ export default function ProductListPage() {
                 </button>
             </div>
             {loadingCreate && <LoadingBox></LoadingBox>}
-            {errorCreate && <Messagebox variant="danger">{errorCreate}</Messagebox>}
+            {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
             {loading ? (
                 <LoadingBox></LoadingBox>
             ) : error ? (
-                <Messagebox variant="danger">{error}</Messagebox>
+                <MessageBox variant="danger">{error}</MessageBox>
             ) : (
                 <table className="table">
                     <thead>

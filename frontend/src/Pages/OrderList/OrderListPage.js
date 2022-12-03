@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteOrders, listOrders } from "~/actions/orderActions";
-import Loadingbox from "~/compenents/Loadingbox";
-import Messagebox from "~/compenents/Messagebox";
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ORDER_DELETE_RESET } from "~/constants/orderConstants";
 
@@ -34,12 +34,12 @@ export default function OrderListPage(props) {
     return (
         <div>
             <h1>Orders</h1>
-            {loadingDelete && <Loadingbox></Loadingbox>}
-            {errorDelete && <Messagebox variant="danger">{errorDelete}</Messagebox>}
+            {loadingDelete && <LoadingBox></LoadingBox>}
+            {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
             {loading ? (
-                <Loadingbox></Loadingbox>
+                <LoadingBox></LoadingBox>
             ) : error ? (
-                <Messagebox variant="danger">{error}</Messagebox>
+                <MessageBox variant="danger">{error}</MessageBox>
             ) : (
                 <table className="table">
                     <thead>

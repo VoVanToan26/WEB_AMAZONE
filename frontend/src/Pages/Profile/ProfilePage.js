@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { detailsUser, updateUserProfile } from "~/actions/userActions";
-import Loadingbox from "~/compenents/Loadingbox";
-import Messagebox from "~/compenents/Messagebox";
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
 import { USER_UPDATE_PROFILE_RESET } from "~/constants/userConstants";
 
 export default function ProfilePage() {
@@ -36,8 +36,8 @@ export default function ProfilePage() {
         } else {
             setName(user.name);
             setEmail(user.email);
-            console.log('userInfo', userInfo.seller, userInfo)
-            if(user.seller){
+            console.log("userInfo", userInfo.seller, userInfo);
+            if (user.seller) {
                 setSellerName(user.seller.name);
                 setSellerLogo(user.seller.logo);
                 setSellerDescription(user.seller.description);
@@ -70,15 +70,15 @@ export default function ProfilePage() {
                     <h1>User Profile</h1>
                 </div>
                 {loading ? (
-                    <Loadingbox></Loadingbox>
+                    <LoadingBox></LoadingBox>
                 ) : error ? (
-                    <Messagebox variant="danger">{error}</Messagebox>
+                    <MessageBox variant="danger">{error}</MessageBox>
                 ) : (
                     <>
-                        {loadingUpdate && <Loadingbox></Loadingbox>}
-                        {errorUpdate && <Messagebox variant="danger">{errorUpdate}</Messagebox>}
+                        {loadingUpdate && <LoadingBox></LoadingBox>}
+                        {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
                         {successUpdate && (
-                            <Messagebox variant="success">Profile Updated Successfully</Messagebox>
+                            <MessageBox variant="success">Profile Updated Successfully</MessageBox>
                         )}
                         <div>
                             <label htmlFor="name">Name</label>

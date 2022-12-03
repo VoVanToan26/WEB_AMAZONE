@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import Loadingbox from "~/compenents/Loadingbox";
-import Messagebox from "~/compenents/Messagebox";
+import LoadingBox from "~/compenents/LoadingBox";
+import MessageBox from "~/compenents/MessageBox";
 import Product from "~/compenents/Product";
 
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "~/actions/productActions";
 import { listTopSellers } from "~/actions/userActions";
 import { Link } from "react-router-dom";
-
 
 function HomePage() {
     const userTopSellersList = useSelector((state) => state.userTopSellersList);
@@ -27,12 +26,12 @@ function HomePage() {
         <div>
             <h2>Top Sellers</h2>
             {loadingSellers ? (
-                <Loadingbox></Loadingbox>
+                <LoadingBox></LoadingBox>
             ) : errorSellers ? (
-                <Messagebox variant="danger">{errorSellers}</Messagebox>
+                <MessageBox variant="danger">{errorSellers}</MessageBox>
             ) : (
                 <>
-                    {sellers.length === 0 && <Messagebox>No Seller Found</Messagebox>}
+                    {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
                     <Carousel showArrows autoPlay showThumbs={false}>
                         {sellers.map((seller) => (
                             <div key={seller._id} className="containerSeller">
@@ -47,12 +46,12 @@ function HomePage() {
             )}
             <h2>Featured Products</h2>
             {loading ? (
-                <Loadingbox></Loadingbox>
+                <LoadingBox></LoadingBox>
             ) : error ? (
-                <Messagebox variant="danger">{error}</Messagebox>
+                <MessageBox variant="danger">{error}</MessageBox>
             ) : (
                 <>
-                    {products.length === 0 && <Messagebox>No Product Found</Messagebox>}
+                    {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
                     <div className="row center">
                         {products.map((product) => (
                             <Product key={product._id} product={product}></Product>
