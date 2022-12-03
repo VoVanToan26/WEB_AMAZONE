@@ -17,6 +17,7 @@ import UserListPage from "~/Pages/UserList";
 import UserEditPage from "~/Pages/UserEdit";
 import SellerPage from "~/Pages/SellerPage";
 import SearchPage from "~/Pages/SearchPage";
+import MapPage from "~/Pages/MapPage";
 
 // Layouts
 
@@ -93,6 +94,11 @@ const publicRoutes = [
         path: config.routes.searchAll,
         component: SearchPage,
         exact: true,
+    },
+    {
+        path: config.routes.map,
+        component: MapPage,
+        private: true,
     },
 ];
 console.log("publicRoutes", publicRoutes);

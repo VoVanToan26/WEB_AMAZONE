@@ -36,7 +36,10 @@ app.use("/api/uploads", uploadRouter);
 app.get("/api/config/paypal", (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
-
+// Add gg map
+app.get("/api/config/google", (req, res) => {
+    res.send(process.env.GOOGLE_API_KEY || "");
+});
 // put a slash upload file to sever folder (slash-GPC)
 const __dirname = path.resolve(); // --> return current folder
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

@@ -119,3 +119,20 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     4. edit parse url to get query string
     5. update product list api for search by name
 56 there is newreview 
+ 57. Choose Address On Google Map
+    1. create google map credentials 
+        goto https://console.cloud.google.com/
+        Api& services 
+        Credentioals
+        Create key
+        library -> map js api -> enable  -> click Maps JavaScript API
+
+
+    2. update .env file with Google Api Key
+    3. create api to send google api to frontend
+    4. create map screen
+    5. fetch google api
+    6. getUserLocation
+    7. install @react-google-maps/api
+    8. use it in shipping screen
+    9. apply map to the checkout screen
