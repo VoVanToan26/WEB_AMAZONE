@@ -25,8 +25,8 @@ const routes = {
     searchCategory: "/search/category/:category",
     searchCategoryName: "/search/category/:category/name/:name",
     searchAll:
-        "/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order",
-
+        "/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber",
+    productListPage: "/productlist/pageNumber/:pageNumber",
     map: "/map",
 
     home: "/",

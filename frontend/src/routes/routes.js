@@ -100,6 +100,11 @@ const publicRoutes = [
         component: MapPage,
         private: true,
     },
+    {
+        path: config.routes.productListPage,
+        component: ProductListPage,
+        private: true,
+    },
 ];
 console.log("publicRoutes", publicRoutes);
 const privateRoutes = [];

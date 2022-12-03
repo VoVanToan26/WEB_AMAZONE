@@ -24,14 +24,23 @@ import {
 } from "~/constants/productConstants";
 
 export const listProducts =
-    ({ seller = "", name = "", category = "", order = "", min = 0, max = 0, rating = 0 }) =>
+    ({
+        pageNumber = "",
+        seller = "",
+        name = "",
+        category = "",
+        order = "",
+        min = 0,
+        max = 0,
+        rating = 0,
+    }) =>
     async (dispatch) => {
         dispatch({
             type: PRODUCT_LIST_REQUEST,
         });
 
         try {
-            var link = `/api/products?seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`;
+            var link = `/api/products?pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`;
             const { data } = await Axios.get(link);
             dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
         } catch (error) {
