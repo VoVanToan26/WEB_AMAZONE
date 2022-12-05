@@ -10,6 +10,7 @@ import SearchBox from "~/components/SearchBox";
 import LoadingBox from "~/components/LoadingBox";
 import MessageBox from "~/components/MessageBox";
 import PrivateRoute from "~/components/PrivateRoute";
+import ChatBox from "~/components/ChatBox";
 
 function App() {
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -130,6 +131,9 @@ function App() {
                                     <li>
                                         <Link to="/userlist">Users</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/support">Support</Link>
+                                    </li>
                                 </ul>
                             </div>
                         )}
@@ -198,7 +202,10 @@ function App() {
                         })}
                     </Routes>
                 </main>
-                <footer className="row center">All right reserved</footer>
+                <footer className="row center">
+                    {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+                    <div>All right reserved</div>{" "}
+                </footer>
             </div>
         </Router>
     );

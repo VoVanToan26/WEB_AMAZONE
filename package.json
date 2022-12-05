@@ -5,7 +5,7 @@
   "description": "��#\u0000 \u0000W\u0000E\u0000B\u0000_\u0000A\u0000M\u0000A\u0000Z\u0000O\u0000N\u0000E\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "build":"cd frontend && npm install --force && npm run build",
+    "build": "cd frontend && npm install --force && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
     "heroku-postbuild": "cd frontend && npm install --force && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,7 +30,8 @@
     "mongoose": "^6.7.2",
     "multer": "^1.4.5-lts.1",
     "react-redux": "^8.0.4",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "eslint": "^8.26.0",
@@ -43,5 +44,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "nodemon": "^2.0.20"
   },
-   "engines": {"node":"v17.6.0", "npm": "8.7.0"}
+  "engines": {
+    "node": "v17.6.0",
+    "npm": "8.7.0"
+  }
 }

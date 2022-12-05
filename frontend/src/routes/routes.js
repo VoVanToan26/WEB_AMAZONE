@@ -18,6 +18,7 @@ import UserEditPage from "~/Pages/UserEdit";
 import SellerPage from "~/Pages/SellerPage";
 import SearchPage from "~/Pages/SearchPage";
 import MapPage from "~/Pages/MapPage";
+import SupportPage from "~/Pages/Support";
 
 // Layouts
 
@@ -98,6 +99,11 @@ const publicRoutes = [
     {
         path: config.routes.map,
         component: MapPage,
+        private: true,
+    },
+    {
+        path: config.routes.support,
+        component: SupportPage,
         private: true,
     },
 ];
