@@ -34,6 +34,7 @@ app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/uploads", uploadRouter);
 app.get("/api/config/paypal", (req, res) => {
+    console.log("paypal id",process.env.PAYPAL_CLIENT_ID || "sb");
     res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
 // Add gg map

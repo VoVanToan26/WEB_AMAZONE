@@ -138,5 +138,5 @@ Click add to cart --> Action --> dispatch ({type, payload})--> Store 16. Build C
     8. use it in shipping screen
     9. apply map to the checkout screen
 =======
-56 there is newreview 
->>>>>>> e3202224ee49f5b7a92474a79e81965b7c2800dd
+ vantoanpp111@gmail.com
+pass word mail gun @LeoMessi2617

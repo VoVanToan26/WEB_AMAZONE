@@ -22,4 +22,5 @@ module.exports = {
         quotes: ["error", "double"],
         semi: ["error", "always", { omitLastInOneLineBlock: true }],
     },
+    indent: ["error", 12],
 };

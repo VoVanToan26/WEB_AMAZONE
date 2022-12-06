@@ -67,10 +67,11 @@ export default function MapPage(props) {
                 },
             });
             alert("location selected successfully.");
-            navigate("/shipping");
+         
         } else {
             alert("Please enter your address");
         }
+           navigate("/payment");
     };
 
     const getUserCurrentLocation = () => {
