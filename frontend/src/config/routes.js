@@ -28,6 +28,7 @@ const routes = {
         "/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber",
     productListPage: "/productlist/pageNumber/:pageNumber",
     map: "/map",
+    dashboard: "/dashboard",
 
     home: "/",
     // profile: '/@:nickname',
