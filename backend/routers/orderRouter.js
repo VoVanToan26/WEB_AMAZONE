@@ -16,7 +16,7 @@ orderRouter.get(
         const orders = await Order.find({ ...sellerFilter }).populate("user", "name");
         console.log("orders info", orders);
         res.send(orders);
-    })
+    }),
 );
 orderRouter.get(
     "/mine",
@@ -24,7 +24,7 @@ orderRouter.get(
     expressAsyncHandler(async (req, res) => {
         const orders = await Order.find({ user: req.user._id });
         res.send(orders);
-    })
+    }),
 );
 
 orderRouter.post(
@@ -48,7 +48,7 @@ orderRouter.post(
             const createdOrder = await order.save();
             res.status(201).send({ message: "New Order Created", order: createdOrder });
         }
-    })
+    }),
 );
 orderRouter.get(
     "/:id",
@@ -60,7 +60,7 @@ orderRouter.get(
         } else {
             res.status(404).send({ message: "Order Not Found" });
         }
-    })
+    }),
 );
 orderRouter.put(
     "/:id/pay",
@@ -77,11 +77,12 @@ orderRouter.put(
                 email_address: req.body.email_address,
             };
             const updatedOrder = await order.save();
+            console.log(`${order.user.name} <${order.user.email}>`);
             mailgun()
                 .messages()
                 .send(
                     {
-                        from: "VantoanFishing <sandbox96e52012b1cc4a41a72058804dfaf443.mailgun.org>",
+                        from: "VantoanFishing <vantoanpp111@gmail.com>",
                         to: `${order.user.name} <${order.user.email}>`,
                         subject: `New order ${order._id}`,
                         html: payOrderEmailTemplate(order),
@@ -92,13 +93,13 @@ orderRouter.put(
                         } else {
                             console.log(body);
                         }
-                    }
+                    },
                 );
             res.send({ message: "Order Paid", order: updatedOrder });
         } else {
             res.status(404).send({ message: "Order Not Found" });
         }
-    })
+    }),
 );
 
 orderRouter.put(
@@ -116,7 +117,7 @@ orderRouter.put(
         } else {
             res.status(404).send({ message: "Order Not Found" });
         }
-    })
+    }),
 );
 
 orderRouter.delete(
@@ -132,6 +133,6 @@ orderRouter.delete(
         } else {
             res.status(404).send({ message: "order Not Found" });
         }
-    })
+    }),
 );
 export default orderRouter;

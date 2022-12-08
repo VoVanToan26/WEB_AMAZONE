@@ -1,7 +1,8 @@
 // define t SOME ultility function like generateToken export const jena rate tokan
 import jwt from "jsonwebtoken";
 import mg from "mailgun-js";
-
+import dotenv from "dotenv"
+dotenv.config()
 export const generateToken = (user) => {
     // obj user for generateToken, josonwetoken secret,
     return jwt.sign(
@@ -16,7 +17,7 @@ export const generateToken = (user) => {
         process.env.JWT_SECRET || "somethingsecret",
         {
             expiresIn: "30d",
-        }
+        },
     );
 };
 
@@ -36,6 +37,7 @@ export const isAuth = (req, res, next) => {
         res.status(401).send({ message: "No Token" });
     }
 };
+
 export const isAdmin = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
         next();
@@ -43,6 +45,7 @@ export const isAdmin = (req, res, next) => {
         res.status(401).send({ message: "Invalid Admin Token" });
     }
 };
+
 export const isSeller = (req, res, next) => {
     if (req.user && req.user.isSeller) {
         next();
@@ -50,6 +53,7 @@ export const isSeller = (req, res, next) => {
         res.status(401).send({ message: "Invalid Seller Token" });
     }
 };
+
 export const isSellerOrAdmin = (req, res, next) => {
     if (req.user && (req.user.isSeller || req.user.isAdmin)) {
         next();
@@ -61,10 +65,12 @@ export const isSellerOrAdmin = (req, res, next) => {
 export const mailgun = () =>
     mg({
         apiKey: process.env.MAILGUN_API_KEY,
-        domain: process.env.MAILGUN_DOMIAN,
-        host: "api.eu.mailgun.net",
+        domain: process.env.MAILGUN_DOMAIN,
     });
-
+    console.log({
+        apiKey: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN,
+    });
 export const payOrderEmailTemplate = (order) => {
     return `<h1>Thanks for shopping with us</h1>
   <p>
@@ -87,7 +93,7 @@ export const payOrderEmailTemplate = (order) => {
     <td align="center">${item.qty}</td>
     <td align="right"> $${item.price.toFixed(2)}</td>
     </tr>
-    `
+    `,
       )
       .join("\n")}
   </tbody>
