@@ -19,6 +19,7 @@ import SellerPage from "~/Pages/SellerPage";
 import SearchPage from "~/Pages/SearchPage";
 import MapPage from "~/Pages/MapPage";
 import DashboardPage from "~/Pages/Dashboard/DashboardPage";
+import SupportPage from "~/Pages/Support";
 
 // Layouts
 
@@ -111,6 +112,11 @@ const publicRoutes = [
         component: DashboardPage,
         private: true,
         isAminPage: true,
+    },
+    {
+        path: config.routes.support,
+        component: SupportPage,
+        private: true,
     },
 ];
 console.log("publicRoutes", publicRoutes);
