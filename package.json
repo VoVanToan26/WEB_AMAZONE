@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd frontend && npm install --force && npm run build",
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
+    "start": "concurrently  \"nodemon --watch backend --exec node --experimental-modules backend/server.js\" \"cd frontend && npm start\"",
     "heroku-postbuild": "cd frontend && npm install --force && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/VoVanToan26/WEB_AMAZONE#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^7.6.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
